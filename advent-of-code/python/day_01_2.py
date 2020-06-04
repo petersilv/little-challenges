@@ -1,6 +1,7 @@
 import math
 
-mass_lst = open('../data/01_input.txt').read().splitlines()
+with open('../data/input_01.txt') as f:
+    mass_lst = f.read().splitlines()
 
 total_fuel = 0
 
