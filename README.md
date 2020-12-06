@@ -1,22 +1,14 @@
 # Little Challenges
 
-## Advent of Code 2019
+## Advent of Code
 
 ### Source
 
-[Advent of Code](https://adventofcode.com/2019/)
+[Advent of Code](https://adventofcode.com/)
 
 ### Details
 
 Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like.
-
-### Status
-
-| Day | Part 1 | Part 2 |
-| :-: | :----: | :----: |
-|  1  | ✅     | ✅     |  
-|  2  |        |        |  
-|  3  | ✅     | ✅     |  
 
 ## One Million Bank Balance
 
