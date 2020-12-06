@@ -188,7 +188,7 @@
     </Node>
     <Node ToolID="7">
       <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
-        <Position x="1398" y="342" />
+        <Position x="1578" y="342" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -289,7 +289,7 @@
     </Node>
     <Node ToolID="13">
       <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
-        <Position x="1218" y="510" />
+        <Position x="1398" y="510" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -318,7 +318,7 @@
     </Node>
     <Node ToolID="14">
       <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="1050" y="342" />
+        <Position x="1230" y="342" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -336,7 +336,7 @@
         </Annotation>
         <MetaInfo connection="Output">
           <RecordInfo>
-            <Field name="Input" size="1073741823" source="Download" type="V_WString" />
+            <Field name="Input" size="1073741823" source="Formula: Trim([Input])" type="V_WString" />
           </RecordInfo>
         </MetaInfo>
       </Properties>
@@ -344,7 +344,7 @@
     </Node>
     <Node ToolID="15">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="1050" y="510" />
+        <Position x="1230" y="510" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -362,7 +362,7 @@
         <MetaInfo connection="Output">
           <RecordInfo>
             <Field name="Day" size="4" source="Formula: PadLeft([Day], 2, '0')" type="V_String" />
-            <Field name="Input" size="1073741823" source="Download" type="V_WString" />
+            <Field name="Input" size="1073741823" source="Formula: Trim([Input])" type="V_WString" />
           </RecordInfo>
         </MetaInfo>
       </Properties>
@@ -370,7 +370,7 @@
     </Node>
     <Node ToolID="16">
       <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
-        <Position x="1218" y="342" />
+        <Position x="1398" y="342" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -392,6 +392,32 @@
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
     </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1062" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="Trim([Input])" field="Input" size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Trim</AnnotationText>
+          <DefaultAnnotationText><![CDATA[Input = Trim([Input])
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Day" size="4" source="TextInput:" type="V_String" />
+            <Field name="Input" size="1073741823" source="Formula: Trim([Input])" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
   </Nodes>
   <Connections>
     <Connection>
@@ -412,11 +438,7 @@
     </Connection>
     <Connection>
       <Origin ToolID="5" Connection="Output" />
-      <Destination ToolID="14" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="5" Connection="Output" />
-      <Destination ToolID="15" Connection="Input" />
+      <Destination ToolID="18" Connection="Input" />
     </Connection>
     <Connection name="#1">
       <Origin ToolID="8" Connection="Question" />
@@ -449,6 +471,14 @@
     <Connection>
       <Origin ToolID="16" Connection="Output" />
       <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="15" Connection="Input" />
     </Connection>
   </Connections>
   <Properties>
