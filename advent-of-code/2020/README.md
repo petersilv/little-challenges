@@ -35,3 +35,13 @@
 | Workflow                                |
 :----------------------------------------:|
 | ![day_06](other/screenshots/day_06.png) |
+
+## Day 7
+
+| Workflow                                |
+:----------------------------------------:|
+| ![day_07](other/screenshots/day_07.png) |
+
+| Macro 1                                 | Macro 2                                             |
+|:---------------------------------------:|:---------------------------------------------------:|
+| ![day_05](other/screenshots/day_07_macro_1.png) | ![day_05_macro](other/screenshots/day_07_macro_2.png) |

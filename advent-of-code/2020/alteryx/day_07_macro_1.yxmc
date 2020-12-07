@@ -1,0 +1,1386 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2020.3">
+  <Nodes>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="294" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>REGEX_Match(
+[contents], 
+'\d+ ' + [search] + ' bags?')</Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>REGEX_Match(
+[contents], 
+'\d+ ' + [search] + ' bags?')</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="bag" size="16" source="TextInput:" type="String" />
+            <Field name="contents" size="24" source="TextInput:" type="V_String" />
+            <Field name="search" size="12" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="bag" size="16" source="TextInput:" type="String" />
+            <Field name="contents" size="24" source="TextInput:" type="V_String" />
+            <Field name="search" size="12" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="462" y="174" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="bag" action="Concat" rename="search">
+              <Concat_Start>(</Concat_Start>
+              <Separator>|</Separator>
+              <Concat_End>)</Concat_End>
+            </SummarizeField>
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="search" size="2147483647" source="Summarize: Concat - bag" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="630" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="bag" size="16" source="TextInput:" type="String" />
+            <Field name="contents" size="24" source="TextInput:" type="V_String" />
+            <Field name="search" size="2147483647" source="Summarize: Concat - bag" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="462" y="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="bag" selected="True" />
+            <SelectField field="contents" selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="bag" size="16" source="TextInput:" type="String" />
+            <Field name="contents" size="24" source="TextInput:" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="978" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - Iterative</Name>
+          <Abbrev>I</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>I Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="102" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input9</Name>
+          <Abbrev />
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="200" />
+              <Fields>
+                <Field name="bag" />
+                <Field name="contents" />
+                <Field name="search" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>dark indigo</c>
+                  <c>2 clear indigo bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored gold</c>
+                  <c>2 pale blue bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored gold</c>
+                  <c>1 dark violet bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim aqua</c>
+                  <c>1 mirrored beige bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim fuchsia</c>
+                  <c>5 dark red bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim fuchsia</c>
+                  <c>1 muted green bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim fuchsia</c>
+                  <c>4 clear indigo bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny fuchsia</c>
+                  <c>4 wavy teal bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny fuchsia</c>
+                  <c>4 dim cyan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny fuchsia</c>
+                  <c>4 light green bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny fuchsia</c>
+                  <c>1 vibrant tomato bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh chartreuse</c>
+                  <c>2 faded blue bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh chartreuse</c>
+                  <c>2 pale plum bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh chartreuse</c>
+                  <c>2 posh coral bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh chartreuse</c>
+                  <c>4 vibrant bronze bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>striped red</c>
+                  <c>3 vibrant red bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>striped purple</c>
+                  <c>5 shiny brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dark silver</c>
+                  <c>1 dull aqua bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dark silver</c>
+                  <c>4 dim magenta bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dark chartreuse</c>
+                  <c>2 plaid black bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dark chartreuse</c>
+                  <c>4 light bronze bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dark chartreuse</c>
+                  <c>5 dotted cyan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny turquoise</c>
+                  <c>1 shiny brown bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny crimson</c>
+                  <c>no other bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear purple</c>
+                  <c>4 bright red bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim white</c>
+                  <c>4 posh violet bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim white</c>
+                  <c>2 light orange bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid lime</c>
+                  <c>4 muted silver bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid lime</c>
+                  <c>2 vibrant tan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear fuchsia</c>
+                  <c>3 muted purple bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear fuchsia</c>
+                  <c>4 striped coral bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim plum</c>
+                  <c>4 posh purple bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim plum</c>
+                  <c>2 faded tomato bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim plum</c>
+                  <c>1 mirrored magenta bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim plum</c>
+                  <c>3 dull lime bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull white</c>
+                  <c>4 light silver bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull white</c>
+                  <c>5 drab purple bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull white</c>
+                  <c>2 wavy orange bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull white</c>
+                  <c>1 striped coral bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull tomato</c>
+                  <c>3 clear cyan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull tomato</c>
+                  <c>5 dark turquoise bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull tomato</c>
+                  <c>4 light orange bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull tomato</c>
+                  <c>3 vibrant red bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid tan</c>
+                  <c>5 faded brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid tan</c>
+                  <c>5 bright bronze bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored fuchsia</c>
+                  <c>5 shiny brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored fuchsia</c>
+                  <c>3 dim magenta bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy aqua</c>
+                  <c>2 light beige bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy aqua</c>
+                  <c>3 vibrant white bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy aqua</c>
+                  <c>2 vibrant gold bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy aqua</c>
+                  <c>5 shiny tomato bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear white</c>
+                  <c>3 dim maroon bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear white</c>
+                  <c>4 vibrant brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear white</c>
+                  <c>1 dim chartreuse bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted yellow</c>
+                  <c>3 shiny crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted yellow</c>
+                  <c>4 posh purple bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted yellow</c>
+                  <c>2 dim plum bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted yellow</c>
+                  <c>3 shiny tomato bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>faded cyan</c>
+                  <c>5 mirrored crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh violet</c>
+                  <c>3 dim lavender bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh violet</c>
+                  <c>3 vibrant teal bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored magenta</c>
+                  <c>1 posh brown bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored magenta</c>
+                  <c>4 shiny teal bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored magenta</c>
+                  <c>2 shiny crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored purple</c>
+                  <c>2 clear aqua bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy salmon</c>
+                  <c>1 dull aqua bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy salmon</c>
+                  <c>1 dark silver bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid purple</c>
+                  <c>2 clear aqua bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid purple</c>
+                  <c>5 pale brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid purple</c>
+                  <c>3 bright chartreuse bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh teal</c>
+                  <c>1 pale turquoise bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh teal</c>
+                  <c>3 drab cyan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale tomato</c>
+                  <c>2 dark beige bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted plum</c>
+                  <c>5 dotted gold bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted plum</c>
+                  <c>5 shiny plum bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted plum</c>
+                  <c>4 dull teal bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy red</c>
+                  <c>3 clear turquoise bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy red</c>
+                  <c>4 shiny chartreuse bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy red</c>
+                  <c>4 dotted maroon bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy tomato</c>
+                  <c>4 dark magenta bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy tomato</c>
+                  <c>1 faded bronze bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny green</c>
+                  <c>3 bright black bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny green</c>
+                  <c>2 clear turquoise bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid turquoise</c>
+                  <c>4 bright maroon bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>vibrant silver</c>
+                  <c>5 bright chartreuse bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>vibrant silver</c>
+                  <c>2 posh white bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>vibrant silver</c>
+                  <c>3 drab tomato bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh olive</c>
+                  <c>3 vibrant purple bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh olive</c>
+                  <c>3 shiny crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh olive</c>
+                  <c>5 faded chartreuse bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear bronze</c>
+                  <c>5 dark magenta bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy teal</c>
+                  <c>1 dim plum bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy teal</c>
+                  <c>1 pale aqua bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy teal</c>
+                  <c>2 posh purple bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy teal</c>
+                  <c>2 pale orange bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted beige</c>
+                  <c>5 dotted brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted beige</c>
+                  <c>4 mirrored green bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted beige</c>
+                  <c>2 plaid blue bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny maroon</c>
+                  <c>2 pale green bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy purple</c>
+                  <c>5 dark bronze bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>vibrant cyan</c>
+                  <c>2 drab blue bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>vibrant cyan</c>
+                  <c>5 pale brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>vibrant cyan</c>
+                  <c>1 mirrored magenta bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>vibrant cyan</c>
+                  <c>4 pale orange bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy gray</c>
+                  <c>5 pale crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy gray</c>
+                  <c>5 light aqua bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy gray</c>
+                  <c>4 muted red bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear tomato</c>
+                  <c>4 dark coral bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny red</c>
+                  <c>4 shiny tan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny red</c>
+                  <c>4 pale cyan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted brown</c>
+                  <c>5 dull olive bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted brown</c>
+                  <c>2 pale silver bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted brown</c>
+                  <c>5 faded plum bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny violet</c>
+                  <c>4 wavy teal bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh white</c>
+                  <c>4 light fuchsia bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh white</c>
+                  <c>1 posh purple bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh white</c>
+                  <c>4 posh green bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim maroon</c>
+                  <c>5 dim gold bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim maroon</c>
+                  <c>1 clear black bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull orange</c>
+                  <c>1 clear teal bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull orange</c>
+                  <c>3 dull gray bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh fuchsia</c>
+                  <c>1 faded gold bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh fuchsia</c>
+                  <c>4 light bronze bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dim bronze</c>
+                  <c>1 bright fuchsia bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull salmon</c>
+                  <c>5 muted tomato bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull salmon</c>
+                  <c>3 dull olive bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull salmon</c>
+                  <c>4 dark brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh yellow</c>
+                  <c>5 dull indigo bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh yellow</c>
+                  <c>1 dotted green bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh yellow</c>
+                  <c>3 shiny chartreuse bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>muted bronze</c>
+                  <c>4 pale brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy plum</c>
+                  <c>4 shiny teal bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy plum</c>
+                  <c>4 vibrant crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dark maroon</c>
+                  <c>2 clear maroon bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dark maroon</c>
+                  <c>3 light crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh gray</c>
+                  <c>2 drab maroon bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>posh gray</c>
+                  <c>3 dotted aqua bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale maroon</c>
+                  <c>2 vibrant turquoise bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale maroon</c>
+                  <c>2 wavy tan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale maroon</c>
+                  <c>5 clear orange bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale maroon</c>
+                  <c>2 clear beige bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored crimson</c>
+                  <c>3 dark cyan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored crimson</c>
+                  <c>3 dark silver bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny bronze</c>
+                  <c>3 drab tomato bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny bronze</c>
+                  <c>3 vibrant tan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale teal</c>
+                  <c>4 clear brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale teal</c>
+                  <c>4 vibrant gray bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale teal</c>
+                  <c>3 bright plum bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale teal</c>
+                  <c>4 dull olive bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid maroon</c>
+                  <c>1 mirrored blue bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid maroon</c>
+                  <c>4 bright chartreuse bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid blue</c>
+                  <c>4 light lime bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dotted brown</c>
+                  <c>5 shiny violet bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dotted brown</c>
+                  <c>2 shiny lavender bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dotted brown</c>
+                  <c>1 striped crimson bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale purple</c>
+                  <c>2 clear tomato bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale purple</c>
+                  <c>5 vibrant orange bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale purple</c>
+                  <c>5 dark green bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>pale purple</c>
+                  <c>1 vibrant silver bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear lavender</c>
+                  <c>1 wavy cyan bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear lavender</c>
+                  <c>5 dotted crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear lavender</c>
+                  <c>5 dark bronze bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>clear lavender</c>
+                  <c>3 light bronze bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>light cyan</c>
+                  <c>5 light lime bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>light cyan</c>
+                  <c>1 mirrored teal bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull blue</c>
+                  <c>3 clear lime bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull blue</c>
+                  <c>1 light turquoise bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull blue</c>
+                  <c>1 shiny gray bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>faded gray</c>
+                  <c>2 faded crimson bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>faded gray</c>
+                  <c>1 pale red bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>faded gray</c>
+                  <c>3 striped bronze bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>drab maroon</c>
+                  <c>2 bright coral bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid gold</c>
+                  <c>2 shiny gold bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid gold</c>
+                  <c>1 wavy fuchsia bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid gold</c>
+                  <c>2 dull aqua bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid gold</c>
+                  <c>4 mirrored indigo bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>mirrored orange</c>
+                  <c>3 muted coral bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull yellow</c>
+                  <c>1 drab maroon bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull yellow</c>
+                  <c>4 posh purple bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull yellow</c>
+                  <c>5 plaid cyan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull yellow</c>
+                  <c>4 vibrant cyan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid aqua</c>
+                  <c>2 bright silver bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid aqua</c>
+                  <c>2 posh blue bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid aqua</c>
+                  <c>3 drab olive bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>plaid aqua</c>
+                  <c>2 mirrored fuchsia bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny olive</c>
+                  <c>3 dim tan bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny olive</c>
+                  <c>1 dark gray bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny olive</c>
+                  <c>4 mirrored brown bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>shiny olive</c>
+                  <c>5 mirrored magenta bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy bronze</c>
+                  <c>4 mirrored gray bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy bronze</c>
+                  <c>1 light lavender bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>wavy bronze</c>
+                  <c>4 dull yellow bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dotted orange</c>
+                  <c>1 plaid teal bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dotted orange</c>
+                  <c>5 pale silver bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dotted orange</c>
+                  <c>1 drab bronze bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull magenta</c>
+                  <c>1 muted violet bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>dull magenta</c>
+                  <c>2 muted black bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>drab indigo</c>
+                  <c>3 pale blue bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>drab indigo</c>
+                  <c>1 muted aqua bag</c>
+                  <c>(shiny gold)</c>
+                </r>
+                <r>
+                  <c>drab indigo</c>
+                  <c>3 bright fuchsia bags</c>
+                  <c>(shiny gold)</c>
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Input</DefaultAnnotationText>
+          <Left value="True" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="bag" size="16" source="TextInput:" type="String" />
+            <Field name="contents" size="24" source="TextInput:" type="V_String" />
+            <Field name="search" size="12" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="462" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - Data</Name>
+          <Abbrev>D</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>D Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="798" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>IsNotNull</Operator>
+            <Field>search</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2020-12-07 07:24:23</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>
+              </Operand>
+              <StartDate>2020-12-07 07:24:23</StartDate>
+              <EndDate>2020-12-07 07:24:23</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>!IsNull([search])</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="bag" size="16" source="TextInput:" type="String" />
+            <Field name="contents" size="24" source="TextInput:" type="V_String" />
+            <Field name="search" size="2147483647" source="Summarize: Concat - bag" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="bag" size="16" source="TextInput:" type="String" />
+            <Field name="contents" size="24" source="TextInput:" type="V_String" />
+            <Field name="search" size="2147483647" source="Summarize: Concat - bag" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="2" Connection="True" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="False" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="True" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="4" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="4" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="True" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="False" />
+    <ZoomLevel value="-2" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>day_07_macro_1</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="False" />
+    </Events>
+    <RuntimeProperties>
+      <Actions />
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (6)</Name>
+          <ToolId value="6" />
+          <Questions>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (7)</Description>
+              <Name>Macro Output (7)</Name>
+              <ToolId value="7" />
+            </Question>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description />
+              <Name>Macro Input (9)</Name>
+              <ToolId value="9" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (10)</Description>
+              <Name>Macro Output (10)</Name>
+              <ToolId value="10" />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="39" />
+      <MacroInputs />
+      <MacroOutputs />
+      <IterativeMacro>
+        <Input>Input9</Input>
+        <Output>Output - Iterative</Output>
+        <IterationLimit value="1000" />
+        <LimitBehavior>Warn</LimitBehavior>
+        <OutputMode>AllSame</OutputMode>
+      </IterativeMacro>
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="7" Selected="True" />
+        <Tool ToolId="9" Selected="True" />
+        <Tool ToolId="10" Selected="True" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>
