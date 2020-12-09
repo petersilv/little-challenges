@@ -55,3 +55,13 @@
 | Macro 1                                                 | Macro 2                                                 |
 |:-------------------------------------------------------:|:-------------------------------------------------------:|
 | ![day_08_macro_1](other/screenshots/day_08_macro_1.png) | ![day_08_macro_2](other/screenshots/day_08_macro_2.png) |
+
+## Day 9
+
+| Workflow                                |
+:----------------------------------------:|
+| ![day_09](other/screenshots/day_09.png) |
+
+| Macro 1                                                 | Macro 2                                                 |
+|:-------------------------------------------------------:|:-------------------------------------------------------:|
+| ![day_09_macro_1](other/screenshots/day_09_macro_1.png) | ![day_09_macro_2](other/screenshots/day_09_macro_2.png) |
