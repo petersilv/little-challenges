@@ -71,3 +71,11 @@
 | Workflow                                |
 :----------------------------------------:|
 | ![day_10](other/screenshots/day_10.png) |
+
+## Day 11
+
+## Day 12
+
+| Workflow                                | Macro                                               |
+|:---------------------------------------:|:---------------------------------------------------:|
+| ![day_12](other/screenshots/day_12.png) | ![day_12_macro](other/screenshots/day_12_macro.png) |
