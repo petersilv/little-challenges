@@ -85,3 +85,9 @@
 | Workflow                                |
 :----------------------------------------:|
 | ![day_13](other/screenshots/day_13.png) |
+
+## Day 14
+
+| Workflow                                |
+:----------------------------------------:|
+| ![day_14](other/screenshots/day_14.png) |
