@@ -74,6 +74,10 @@
 
 ## Day 11
 
+| Workflow                                | Macro                                               |
+|:---------------------------------------:|:---------------------------------------------------:|
+| ![day_11](other/screenshots/day_11.png) | ![day_11_macro](other/screenshots/day_11_macro.png) |
+
 ## Day 12
 
 | Workflow                                | Macro                                               |

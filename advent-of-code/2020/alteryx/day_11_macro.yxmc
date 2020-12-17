@@ -1,0 +1,3752 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2020.3">
+  <Nodes>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="414" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="Row_ID_Lookup" />
+            <Field field="Col_ID_Lookup" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="Row_ID" />
+            <Field field="Col_ID" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_Seat_ID" selected="False" rename="Right_Seat_ID" input="Right_" />
+                <SelectField field="Right_Row_ID" selected="False" rename="Right_Row_ID" input="Right_" />
+                <SelectField field="Right_Col_ID" selected="False" rename="Right_Col_ID" input="Right_" />
+                <SelectField field="Right_Status" selected="True" rename="Adjacent_Status" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Left">
+          <RecordInfo>
+            <Field name="Seat_ID" source="TextInput:" type="Byte" />
+            <Field name="Row_ID" source="TextInput:" type="Byte" />
+            <Field name="Col_ID" source="TextInput:" type="Byte" />
+            <Field name="Status" size="1" source="TextInput:" type="String" />
+            <Field name="Row_ID_Lookup" source="TextInput:" type="Byte" />
+            <Field name="Col_ID_Lookup" source="TextInput:" type="Byte" />
+          </RecordInfo>
+          <SortInfo noProgress="True">
+            <Field field="Row_ID_Lookup" />
+            <Field field="Col_ID_Lookup" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="Join">
+          <RecordInfo>
+            <Field name="Seat_ID" source="TextInput:" type="Byte" />
+            <Field name="Row_ID" source="TextInput:" type="Byte" />
+            <Field name="Col_ID" source="TextInput:" type="Byte" />
+            <Field name="Status" size="1" source="TextInput:" type="String" />
+            <Field name="Row_ID_Lookup" source="TextInput:" type="Byte" />
+            <Field name="Col_ID_Lookup" source="TextInput:" type="Byte" />
+            <Field name="Adjacent_Status" size="1" source="TextInput:" type="String" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="Row_ID_Lookup" order="" />
+            <Field field="Col_ID_Lookup" order="" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="Right">
+          <RecordInfo>
+            <Field name="Row_ID" source="TextInput:" type="Byte" />
+            <Field name="Col_ID" source="TextInput:" type="Byte" />
+            <Field name="Status" size="1" source="TextInput:" type="String" />
+          </RecordInfo>
+          <SortInfo noProgress="True">
+            <Field field="Row_ID" />
+            <Field field="Col_ID" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+        <Position x="558" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SortInfo locale="0">
+            <Field field="Seat_ID" order="Ascending" />
+          </SortInfo>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Seat_ID - Ascending</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Seat_ID" source="TextInput:" type="Byte" />
+            <Field name="Row_ID" source="TextInput:" type="Byte" />
+            <Field name="Col_ID" source="TextInput:" type="Byte" />
+            <Field name="Status" size="1" source="TextInput:" type="String" />
+            <Field name="Row_ID_Lookup" source="TextInput:" type="Byte" />
+            <Field name="Col_ID_Lookup" source="TextInput:" type="Byte" />
+            <Field name="Adjacent_Status" size="1" source="TextInput:" type="String" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="Seat_ID" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.CrossTab.CrossTab">
+        <Position x="690" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <GroupFields>
+            <Field field="Seat_ID" />
+            <Field field="Row_ID" />
+            <Field field="Col_ID" />
+            <Field field="Status" />
+          </GroupFields>
+          <HeaderField field="Adjacent_Status" />
+          <DataField field="Seat_ID" />
+          <Methods>
+            <Method method="Count" />
+          </Methods>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Seat_ID" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="Row_ID" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="Col_ID" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="Status" size="1" source="CrossTab:Group:Count:" type="String" />
+            <Field name="Count_L" source="CrossTab:Header:Adjacent_Status:L:CountNonNulls:" type="Double" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="Seat_ID" order="Asc" />
+            <Field field="Row_ID" order="Asc" />
+            <Field field="Col_ID" order="Asc" />
+            <Field field="Status" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxCrossTab" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="558" y="486" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="0" />
+          <Fields>
+            <Field name="Count_F" />
+            <Field name="Count_L" />
+            <Field name="Count_O" />
+          </Fields>
+          <Data />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Count_F" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="Count_L" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="Count_O" size="1073741823" source="TextInput:" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Union.Union">
+        <Position x="834" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ByName_ErrorMode>Ignore</ByName_ErrorMode>
+          <ByName_OutputMode>All</ByName_OutputMode>
+          <Mode>ByName</Mode>
+          <SetOutputOrder value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Seat_ID" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="Row_ID" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="Col_ID" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="Status" size="1" source="CrossTab:Group:Count:" type="String" />
+            <Field name="Count_L" source="(Multiple Sources)" type="Double" />
+            <Field name="Count_O" source="TextInput:" type="Double" />
+            <Field name="Count_F" source="TextInput:" type="Double" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnion" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings>
+        <Position x="966" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="Check Box (135)">False</Value>
+          <Value name="Check Box (136)">False</Value>
+          <Value name="List Box (11)">"Count_F","Count_L","Count_O"</Value>
+          <Value name="Check Box (84)">False</Value>
+          <Value name="Check Box (117)">True</Value>
+          <Value name="Check Box (15)">False</Value>
+          <Value name="Check Box (109)">False</Value>
+          <Value name="Check Box (122)">False</Value>
+          <Value name="Check Box (53)">False</Value>
+          <Value name="Check Box (58)">False</Value>
+          <Value name="Check Box (70)">False</Value>
+          <Value name="Check Box (77)">False</Value>
+          <Value name="Drop Down (81)">upper</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output26">
+          <RecordInfo>
+            <Field name="Seat_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Row_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Col_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Status" size="1" source="Formula: [_CurrentField_]" type="String" />
+            <Field name="Count_L" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_O" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_F" source="Formula: [_CurrentField_]" type="Double" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings Macro="Cleanse.yxmc" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="690" y="486" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="True" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Count_O" selected="True" type="Double" size="8" />
+            <SelectField field="Count_F" selected="True" type="Double" size="8" />
+            <SelectField field="Count_L" selected="True" type="Double" size="8" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Count_O" source="TextInput:" type="Double" />
+            <Field name="Count_F" source="TextInput:" type="Double" />
+            <Field name="Count_L" source="TextInput:" type="Double" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1098" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="4" field="Occupied" size="1" type="Byte" />
+            <FormulaField expression="if ([Status] = 'L' and [Count_O] = 0)&#xA;or ([Status] = 'O' and [Count_O] &gt;= [Occupied])&#xA;then 1&#xA;&#xA;else 0&#xA;endif" field="Status_Change" size="2" type="Int16" />
+            <FormulaField expression="if [Status] = 'L' and [Count_O] = 0&#xA;then 'O'&#xA;&#xA;elseif [Status] = 'O' and [Count_O] &gt;= [Occupied]&#xA;then 'L'&#xA;&#xA;else [Status]&#xA;endif&#xA;" field="Status" size="1" type="String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Status_Change</AnnotationText>
+          <DefaultAnnotationText>Occupied = 4
+Status_Change = if ([Status] = 'L' and [Count_O] = 0)
+or ([Status] ...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Seat_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Row_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Col_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Status" size="1" source="Formula: if [Status] = 'L' and [Count_O] = 0&#xA;then 'O'&#xA;&#xA;elseif [Status] = 'O' and [Count_O] &gt;= [Occupied]&#xA;then 'L'&#xA;&#xA;else [Status]&#xA;endif&#xA;" type="String" />
+            <Field name="Count_L" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_O" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_F" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Occupied" source="Formula: 4" type="Byte" />
+            <Field name="Status_Change" source="Formula: if ([Status] = 'L' and [Count_O] = 0)&#xA;or ([Status] = 'O' and [Count_O] &gt;= [Occupied])&#xA;then 1&#xA;&#xA;else 0&#xA;endif" type="Int16" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="1218" y="390" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="Status_Change" action="Sum" rename="Total_Status_Change" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Total_Status_Change" source="Summarize: Sum - Status_Change" type="Int64" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="1338" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Target_Occupied" selected="False" input="Target_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Seat_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Row_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Col_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Status" size="1" source="Formula: if [Status] = 'L' and [Count_O] = 0&#xA;then 'O'&#xA;&#xA;elseif [Status] = 'O' and [Count_O] &gt;= [Occupied]&#xA;then 'L'&#xA;&#xA;else [Status]&#xA;endif&#xA;" type="String" />
+            <Field name="Count_L" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_O" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_F" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Status_Change" source="Formula: if ([Status] = 'L' and [Count_O] = 0)&#xA;or ([Status] = 'O' and [Count_O] &gt;= [Occupied])&#xA;then 1&#xA;&#xA;else 0&#xA;endif" type="Int16" />
+            <Field name="Total_Status_Change" source="Summarize: Sum - Status_Change" type="Int64" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="1482" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>&gt;</Operator>
+            <Field>Total_Status_Change</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2020-12-11 08:39:53</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>0</Operand>
+              <StartDate>2020-12-11 08:39:53</StartDate>
+              <EndDate>2020-12-11 08:39:53</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[Total_Status_Change] &gt; 0</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="Seat_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Row_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Col_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Status" size="1" source="Formula: if [Status] = 'L' and [Count_O] = 0&#xA;then 'O'&#xA;&#xA;elseif [Status] = 'O' and [Count_O] &gt;= [Occupied]&#xA;then 'L'&#xA;&#xA;else [Status]&#xA;endif&#xA;" type="String" />
+            <Field name="Count_L" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_O" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_F" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Status_Change" source="Formula: if ([Status] = 'L' and [Count_O] = 0)&#xA;or ([Status] = 'O' and [Count_O] &gt;= [Occupied])&#xA;then 1&#xA;&#xA;else 0&#xA;endif" type="Int16" />
+            <Field name="Total_Status_Change" source="Summarize: Sum - Status_Change" type="Int64" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="Seat_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Row_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Col_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Status" size="1" source="Formula: if [Status] = 'L' and [Count_O] = 0&#xA;then 'O'&#xA;&#xA;elseif [Status] = 'O' and [Count_O] &gt;= [Occupied]&#xA;then 'L'&#xA;&#xA;else [Status]&#xA;endif&#xA;" type="String" />
+            <Field name="Count_L" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_O" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Count_F" source="Formula: [_CurrentField_]" type="Double" />
+            <Field name="Status_Change" source="Formula: if ([Status] = 'L' and [Count_O] = 0)&#xA;or ([Status] = 'O' and [Count_O] &gt;= [Occupied])&#xA;then 1&#xA;&#xA;else 0&#xA;endif" type="Int16" />
+            <Field name="Total_Status_Change" source="Summarize: Sum - Status_Change" type="Int64" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="15">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1626" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Seat_ID" selected="True" />
+            <SelectField field="Row_ID" selected="True" />
+            <SelectField field="Col_ID" selected="True" />
+            <SelectField field="Status" selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Seat_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Row_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Col_ID" source="Formula: [_CurrentField_]" type="Byte" />
+            <Field name="Status" size="1" source="Formula: if [Status] = 'L' and [Count_O] = 0&#xA;then 'O'&#xA;&#xA;elseif [Status] = 'O' and [Count_O] &gt;= [Occupied]&#xA;then 'L'&#xA;&#xA;else [Status]&#xA;endif&#xA;" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="19">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="114" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input</Name>
+          <Abbrev />
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="71" />
+              <Fields>
+                <Field name="Seat_ID" />
+                <Field name="Row_ID" />
+                <Field name="Col_ID" />
+                <Field name="Status" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>1</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>4</c>
+                  <c>1</c>
+                  <c>4</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>6</c>
+                  <c>1</c>
+                  <c>6</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>7</c>
+                  <c>1</c>
+                  <c>7</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>9</c>
+                  <c>1</c>
+                  <c>9</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>10</c>
+                  <c>1</c>
+                  <c>10</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>11</c>
+                  <c>2</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>2</c>
+                  <c>2</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>2</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>2</c>
+                  <c>4</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>2</c>
+                  <c>5</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>2</c>
+                  <c>6</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>2</c>
+                  <c>7</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>2</c>
+                  <c>9</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>20</c>
+                  <c>2</c>
+                  <c>10</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>21</c>
+                  <c>3</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>3</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>3</c>
+                  <c>5</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>3</c>
+                  <c>8</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>31</c>
+                  <c>4</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>4</c>
+                  <c>2</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>4</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>4</c>
+                  <c>4</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>4</c>
+                  <c>6</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>4</c>
+                  <c>7</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>4</c>
+                  <c>9</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>40</c>
+                  <c>4</c>
+                  <c>10</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>41</c>
+                  <c>5</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>5</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>5</c>
+                  <c>4</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>5</c>
+                  <c>6</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>5</c>
+                  <c>7</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>5</c>
+                  <c>9</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>50</c>
+                  <c>5</c>
+                  <c>10</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>51</c>
+                  <c>6</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>6</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>6</c>
+                  <c>4</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>6</c>
+                  <c>5</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>6</c>
+                  <c>6</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>6</c>
+                  <c>7</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>6</c>
+                  <c>9</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>60</c>
+                  <c>6</c>
+                  <c>10</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>7</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>7</c>
+                  <c>5</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>71</c>
+                  <c>8</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>8</c>
+                  <c>2</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>8</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>8</c>
+                  <c>4</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>8</c>
+                  <c>5</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>8</c>
+                  <c>6</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>8</c>
+                  <c>7</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>8</c>
+                  <c>8</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>8</c>
+                  <c>9</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>80</c>
+                  <c>8</c>
+                  <c>10</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>81</c>
+                  <c>9</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>9</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>9</c>
+                  <c>4</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>9</c>
+                  <c>5</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>9</c>
+                  <c>6</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>9</c>
+                  <c>7</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>9</c>
+                  <c>8</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>90</c>
+                  <c>9</c>
+                  <c>10</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>91</c>
+                  <c>10</c>
+                  <c>1</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>93</c>
+                  <c>10</c>
+                  <c>3</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>94</c>
+                  <c>10</c>
+                  <c>4</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>95</c>
+                  <c>10</c>
+                  <c>5</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>96</c>
+                  <c>10</c>
+                  <c>6</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>97</c>
+                  <c>10</c>
+                  <c>7</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>99</c>
+                  <c>10</c>
+                  <c>9</c>
+                  <c>L</c>
+                </r>
+                <r>
+                  <c>100</c>
+                  <c>10</c>
+                  <c>10</c>
+                  <c>L</c>
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Input</DefaultAnnotationText>
+          <Left value="True" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Seat_ID" source="TextInput:" type="Byte" />
+            <Field name="Row_ID" source="TextInput:" type="Byte" />
+            <Field name="Col_ID" source="TextInput:" type="Byte" />
+            <Field name="Status" size="1" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="20">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="1782" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - Iterative</Name>
+          <Abbrev>I</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>I Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="21">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="1782" y="486" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - Data</Name>
+          <Abbrev>D</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>D Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="22">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="1482" y="486" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="Status" action="GroupBy" rename="Status" />
+            <SummarizeField field="Status" action="Count" rename="Count" />
+            <SummarizeField field="Total_Status_Change" action="GroupBy" rename="Total_Status_Change" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Status" size="1" source="Summarize: GroupBy - Status" type="String" />
+            <Field name="Count" source="Summarize: Count - Status" type="Int64" />
+            <Field name="Total_Status_Change" source="Summarize: GroupBy - Total_Status_Change" type="Int64" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="Status" order="Asc" />
+            <Field field="Total_Status_Change" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="35">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="270" y="486" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="Seat_ID" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="Seat_ID" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_Seat_ID" selected="False" rename="Right_Seat_ID" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Left">
+          <RecordInfo>
+            <Field name="Seat_ID" source="TextInput:" type="Byte" />
+            <Field name="Row_ID" source="TextInput:" type="Byte" />
+            <Field name="Col_ID" source="TextInput:" type="Byte" />
+            <Field name="Status" size="1" source="TextInput:" type="String" />
+          </RecordInfo>
+          <SortInfo noProgress="True">
+            <Field field="Seat_ID" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="Join">
+          <RecordInfo>
+            <Field name="Seat_ID" source="TextInput:" type="Byte" />
+            <Field name="Row_ID" source="TextInput:" type="Byte" />
+            <Field name="Col_ID" source="TextInput:" type="Byte" />
+            <Field name="Status" size="1" source="TextInput:" type="String" />
+            <Field name="Row_ID_Lookup" source="TextInput:" type="Byte" />
+            <Field name="Col_ID_Lookup" source="TextInput:" type="Byte" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="Seat_ID" order="" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="Right">
+          <RecordInfo>
+            <Field name="Seat_ID" source="TextInput:" type="Byte" />
+            <Field name="Row_ID_Lookup" source="TextInput:" type="Byte" />
+            <Field name="Col_ID_Lookup" source="TextInput:" type="Byte" />
+          </RecordInfo>
+          <SortInfo noProgress="True">
+            <Field field="Seat_ID" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="36">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="114" y="498" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input - Ranges</Name>
+          <Abbrev>R</Abbrev>
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="476" />
+              <Fields>
+                <Field name="Seat_ID" />
+                <Field name="Row_ID_Lookup" />
+                <Field name="Col_ID_Lookup" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>2</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>2</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>1</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>1</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>2</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>2</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>2</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>4</c>
+                  <c>1</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>4</c>
+                  <c>1</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>4</c>
+                  <c>2</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>4</c>
+                  <c>2</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>4</c>
+                  <c>2</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>6</c>
+                  <c>1</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>6</c>
+                  <c>1</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>6</c>
+                  <c>2</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>6</c>
+                  <c>2</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>6</c>
+                  <c>2</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>7</c>
+                  <c>1</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>7</c>
+                  <c>1</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>7</c>
+                  <c>2</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>7</c>
+                  <c>2</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>7</c>
+                  <c>2</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>9</c>
+                  <c>1</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>9</c>
+                  <c>1</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>9</c>
+                  <c>2</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>9</c>
+                  <c>2</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>9</c>
+                  <c>2</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>10</c>
+                  <c>1</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>10</c>
+                  <c>2</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>10</c>
+                  <c>2</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>11</c>
+                  <c>1</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>11</c>
+                  <c>1</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>11</c>
+                  <c>2</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>11</c>
+                  <c>3</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>11</c>
+                  <c>3</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>1</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>1</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>1</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>2</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>2</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>3</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>3</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>12</c>
+                  <c>3</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>1</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>1</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>1</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>2</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>2</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>3</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>3</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>13</c>
+                  <c>3</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>1</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>1</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>1</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>2</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>2</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>3</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>3</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>14</c>
+                  <c>3</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>1</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>1</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>1</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>2</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>2</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>3</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>3</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>15</c>
+                  <c>3</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>1</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>1</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>1</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>2</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>2</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>3</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>3</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>16</c>
+                  <c>3</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>1</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>1</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>1</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>2</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>2</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>3</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>3</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>17</c>
+                  <c>3</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>1</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>1</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>1</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>2</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>2</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>3</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>3</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>19</c>
+                  <c>3</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>20</c>
+                  <c>1</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>20</c>
+                  <c>1</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>20</c>
+                  <c>2</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>20</c>
+                  <c>3</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>20</c>
+                  <c>3</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>21</c>
+                  <c>2</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>21</c>
+                  <c>2</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>21</c>
+                  <c>3</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>21</c>
+                  <c>4</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>21</c>
+                  <c>4</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>2</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>2</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>2</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>3</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>3</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>4</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>4</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>23</c>
+                  <c>4</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>2</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>2</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>2</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>3</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>3</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>4</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>4</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>25</c>
+                  <c>4</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>2</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>2</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>2</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>3</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>3</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>4</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>4</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>28</c>
+                  <c>4</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>31</c>
+                  <c>3</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>31</c>
+                  <c>3</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>31</c>
+                  <c>4</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>31</c>
+                  <c>5</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>31</c>
+                  <c>5</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>3</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>3</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>3</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>4</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>4</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>5</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>5</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>32</c>
+                  <c>5</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>3</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>3</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>3</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>4</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>4</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>5</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>5</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>33</c>
+                  <c>5</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>3</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>3</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>3</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>4</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>4</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>5</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>5</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>34</c>
+                  <c>5</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>3</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>3</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>3</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>4</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>4</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>5</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>5</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>36</c>
+                  <c>5</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>3</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>3</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>3</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>4</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>4</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>5</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>5</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>37</c>
+                  <c>5</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>3</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>3</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>3</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>4</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>4</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>5</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>5</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>39</c>
+                  <c>5</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>40</c>
+                  <c>3</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>40</c>
+                  <c>3</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>40</c>
+                  <c>4</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>40</c>
+                  <c>5</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>40</c>
+                  <c>5</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>41</c>
+                  <c>4</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>41</c>
+                  <c>4</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>41</c>
+                  <c>5</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>41</c>
+                  <c>6</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>41</c>
+                  <c>6</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>4</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>4</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>4</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>5</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>5</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>6</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>6</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>43</c>
+                  <c>6</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>4</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>4</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>4</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>5</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>5</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>6</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>6</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>44</c>
+                  <c>6</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>4</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>4</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>4</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>5</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>5</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>6</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>6</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>46</c>
+                  <c>6</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>4</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>4</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>4</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>5</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>5</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>6</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>6</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>47</c>
+                  <c>6</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>4</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>4</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>4</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>5</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>5</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>6</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>6</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>49</c>
+                  <c>6</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>50</c>
+                  <c>4</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>50</c>
+                  <c>4</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>50</c>
+                  <c>5</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>50</c>
+                  <c>6</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>50</c>
+                  <c>6</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>51</c>
+                  <c>5</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>51</c>
+                  <c>5</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>51</c>
+                  <c>6</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>51</c>
+                  <c>7</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>51</c>
+                  <c>7</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>5</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>5</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>5</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>6</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>6</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>7</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>7</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>53</c>
+                  <c>7</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>5</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>5</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>5</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>6</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>6</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>7</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>7</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>54</c>
+                  <c>7</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>5</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>5</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>5</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>6</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>6</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>7</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>7</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>55</c>
+                  <c>7</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>5</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>5</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>5</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>6</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>6</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>7</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>7</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>56</c>
+                  <c>7</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>5</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>5</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>5</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>6</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>6</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>7</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>7</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>57</c>
+                  <c>7</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>5</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>5</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>5</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>6</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>6</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>7</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>7</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>59</c>
+                  <c>7</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>60</c>
+                  <c>5</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>60</c>
+                  <c>5</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>60</c>
+                  <c>6</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>60</c>
+                  <c>7</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>60</c>
+                  <c>7</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>6</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>6</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>6</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>7</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>7</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>8</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>8</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>63</c>
+                  <c>8</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>6</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>6</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>6</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>7</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>7</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>8</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>8</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>65</c>
+                  <c>8</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>71</c>
+                  <c>7</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>71</c>
+                  <c>7</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>71</c>
+                  <c>8</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>71</c>
+                  <c>9</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>71</c>
+                  <c>9</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>7</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>7</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>7</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>8</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>8</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>9</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>9</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>72</c>
+                  <c>9</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>7</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>7</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>7</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>8</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>8</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>9</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>9</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>73</c>
+                  <c>9</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>7</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>7</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>7</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>8</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>8</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>9</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>9</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>74</c>
+                  <c>9</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>7</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>7</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>7</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>8</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>8</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>9</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>9</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>75</c>
+                  <c>9</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>7</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>7</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>7</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>8</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>8</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>9</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>9</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>76</c>
+                  <c>9</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>7</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>7</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>7</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>8</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>8</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>9</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>9</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>77</c>
+                  <c>9</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>7</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>7</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>7</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>8</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>8</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>9</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>9</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>78</c>
+                  <c>9</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>7</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>7</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>7</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>8</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>8</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>9</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>9</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>79</c>
+                  <c>9</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>80</c>
+                  <c>7</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>80</c>
+                  <c>7</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>80</c>
+                  <c>8</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>80</c>
+                  <c>9</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>80</c>
+                  <c>9</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>81</c>
+                  <c>8</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>81</c>
+                  <c>8</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>81</c>
+                  <c>9</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>81</c>
+                  <c>10</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>81</c>
+                  <c>10</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>8</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>8</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>8</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>9</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>9</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>10</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>10</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>83</c>
+                  <c>10</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>8</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>8</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>8</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>9</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>9</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>10</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>10</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>84</c>
+                  <c>10</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>8</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>8</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>8</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>9</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>9</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>10</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>10</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>85</c>
+                  <c>10</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>8</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>8</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>8</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>9</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>9</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>10</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>10</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>86</c>
+                  <c>10</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>8</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>8</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>8</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>9</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>9</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>10</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>10</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>87</c>
+                  <c>10</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>8</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>8</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>8</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>9</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>9</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>10</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>10</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>88</c>
+                  <c>10</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>90</c>
+                  <c>8</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>90</c>
+                  <c>8</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>90</c>
+                  <c>9</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>90</c>
+                  <c>10</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>90</c>
+                  <c>10</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>91</c>
+                  <c>9</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>91</c>
+                  <c>9</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>91</c>
+                  <c>10</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>93</c>
+                  <c>9</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>93</c>
+                  <c>9</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>93</c>
+                  <c>9</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>93</c>
+                  <c>10</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>93</c>
+                  <c>10</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>94</c>
+                  <c>9</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>94</c>
+                  <c>9</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>94</c>
+                  <c>9</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>94</c>
+                  <c>10</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>94</c>
+                  <c>10</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>95</c>
+                  <c>9</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>95</c>
+                  <c>9</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>95</c>
+                  <c>9</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>95</c>
+                  <c>10</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>95</c>
+                  <c>10</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>96</c>
+                  <c>9</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>96</c>
+                  <c>9</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>96</c>
+                  <c>9</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>96</c>
+                  <c>10</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>96</c>
+                  <c>10</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>97</c>
+                  <c>9</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>97</c>
+                  <c>9</c>
+                  <c>7</c>
+                </r>
+                <r>
+                  <c>97</c>
+                  <c>9</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>97</c>
+                  <c>10</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>97</c>
+                  <c>10</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>99</c>
+                  <c>9</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>99</c>
+                  <c>9</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>99</c>
+                  <c>9</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>99</c>
+                  <c>10</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>99</c>
+                  <c>10</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>100</c>
+                  <c>9</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>100</c>
+                  <c>9</c>
+                  <c>10</c>
+                </r>
+                <r>
+                  <c>100</c>
+                  <c>10</c>
+                  <c>9</c>
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>R Input</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Seat_ID" source="TextInput:" type="Byte" />
+            <Field name="Row_ID_Lookup" source="TextInput:" type="Byte" />
+            <Field name="Col_ID_Lookup" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="37">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.NumericUpDown.NumericUpDown">
+        <Position x="1098" y="90" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Occupied Seats</AnnotationText>
+          <DefaultAnnotationText>Numeric Up Down (37)</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="38">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
+        <Position x="1110" y="198" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Update Value</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="4" Connection="Join" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input2" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output26" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="38" Connection="Action" />
+      <Destination ToolID="11" Connection="Action" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="13" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="13" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="22" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="True" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="20" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="4" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="35" Connection="Join" />
+      <Destination ToolID="4" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="35" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="36" Connection="Output" />
+      <Destination ToolID="35" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="22" Connection="Output" />
+      <Destination ToolID="21" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="37" Connection="Question" />
+      <Destination ToolID="38" Connection="Question" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="False" />
+    <ZoomLevel value="-1" />
+    <LayoutType>Horizontal</LayoutType>
+    <Constants>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Input (36)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Numeric Up Down (37)</Name>
+        <Value />
+        <IsNumeric value="True" />
+      </Constant>
+    </Constants>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>day_11_macro_1</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="False" />
+    </Events>
+    <RuntimeProperties>
+      <Actions>
+        <NoCondition>
+          <Type>NoCondition</Type>
+          <Description>(Always Run)</Description>
+          <True>
+            <Action>
+              <Type>UpdateValue</Type>
+              <Description />
+              <ToolId value="38" />
+              <Mode>Simple</Mode>
+              <Variable />
+              <Replace value="False" />
+              <Destination>11/FormulaFields/FormulaField[@field='Occupied']/@expression</Destination>
+            </Action>
+          </True>
+        </NoCondition>
+      </Actions>
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (16)</Name>
+          <ToolId value="16" />
+          <Questions>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description />
+              <Name>Macro Input (19)</Name>
+              <ToolId value="19" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (20)</Description>
+              <Name>Macro Output (20)</Name>
+              <ToolId value="20" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (21)</Description>
+              <Name>Macro Output (21)</Name>
+              <ToolId value="21" />
+            </Question>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description />
+              <Name>Macro Input (36)</Name>
+              <ToolId value="36" />
+            </Question>
+            <Question>
+              <Type>NumericUpDown</Type>
+              <Description>Occupied Seats</Description>
+              <Name>Numeric Up Down (37)</Name>
+              <ToolId value="37" />
+              <Minimum value="1" />
+              <Maximum value="10" />
+              <Increment value="1" />
+              <Default value="4" />
+              <Decimals value="0" />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="39" />
+      <MacroInputs />
+      <MacroOutputs />
+      <IterativeMacro>
+        <Input>Input</Input>
+        <Output>Output - Iterative</Output>
+        <IterationLimit value="100" />
+        <LimitBehavior>Error</LimitBehavior>
+        <OutputMode>AllSame</OutputMode>
+      </IterativeMacro>
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="9" Selected="True" />
+        <Tool ToolId="19" Selected="True" />
+        <Tool ToolId="20" Selected="True" />
+        <Tool ToolId="21" Selected="True" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>
