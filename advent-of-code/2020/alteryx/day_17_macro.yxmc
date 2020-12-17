@@ -1,0 +1,1195 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2020.3">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="306" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Allow</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="TextInput:" type="Byte" />
+            <Field name="x" source="TextInput:" type="Byte" />
+            <Field name="y" source="TextInput:" type="Byte" />
+            <Field name="z" source="TextInput:" type="Byte" />
+            <Field name="w" source="TextInput:" type="Byte" />
+            <Field name="current" size="7" source="TextInput:" type="String" />
+            <Field name="x_diff" source="TextInput:" type="Int16" />
+            <Field name="y_diff" source="TextInput:" type="Int16" />
+            <Field name="z_diff" source="TextInput:" type="Int16" />
+            <Field name="w_diff" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="450" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[x] + [x_diff]" field="x_lookup" size="4" type="Int32" />
+            <FormulaField expression="[y] + [y_diff]" field="y_lookup" size="4" type="Int32" />
+            <FormulaField expression="[z] + [z_diff]" field="z_lookup" size="4" type="Int32" />
+            <FormulaField expression="[w] + [w_diff]" field="w_lookup" size="4" type="Int32" />
+            <FormulaField expression="ToString([x_lookup]) +&#xA;',' +&#xA;ToString([y_lookup]) +&#xA;',' +&#xA;ToString([z_lookup]) +&#xA;',' +&#xA;ToString([w_lookup])" field="lookup" size="11" type="String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>lookup</AnnotationText>
+          <DefaultAnnotationText>x_lookup = [x] + [x_diff]
+y_lookup = [y] + [y_diff]
+z_lookup = [z] + [z_diff]
+w_...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="TextInput:" type="Byte" />
+            <Field name="x" source="TextInput:" type="Byte" />
+            <Field name="y" source="TextInput:" type="Byte" />
+            <Field name="z" source="TextInput:" type="Byte" />
+            <Field name="w" source="TextInput:" type="Byte" />
+            <Field name="current" size="7" source="TextInput:" type="String" />
+            <Field name="x_diff" source="TextInput:" type="Int16" />
+            <Field name="y_diff" source="TextInput:" type="Int16" />
+            <Field name="z_diff" source="TextInput:" type="Int16" />
+            <Field name="w_diff" source="TextInput:" type="Byte" />
+            <Field name="x_lookup" source="Formula: [x] + [x_diff]" type="Int32" />
+            <Field name="y_lookup" source="Formula: [y] + [y_diff]" type="Int32" />
+            <Field name="z_lookup" source="Formula: [z] + [z_diff]" type="Int32" />
+            <Field name="w_lookup" source="Formula: [w] + [w_diff]" type="Int32" />
+            <Field name="lookup" size="11" source="Formula: ToString([x_lookup]) +&#xA;',' +&#xA;ToString([y_lookup]) +&#xA;',' +&#xA;ToString([z_lookup]) +&#xA;',' +&#xA;ToString([w_lookup])" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.FindReplace.FindReplace">
+        <Position x="618" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FieldFind>lookup</FieldFind>
+          <FieldSearch>current</FieldSearch>
+          <ReplaceFoundField>current</ReplaceFoundField>
+          <FindMode>FindWhole</FindMode>
+          <NoCase value="False" />
+          <MatchWholeWord value="False" />
+          <ReplaceMode>Append</ReplaceMode>
+          <ReplaceMultipleFound value="True" />
+          <ReplaceAppendFields>
+            <Field field="status_lookup" />
+          </ReplaceAppendFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="TextInput:" type="Byte" />
+            <Field name="x" source="TextInput:" type="Byte" />
+            <Field name="y" source="TextInput:" type="Byte" />
+            <Field name="z" source="TextInput:" type="Byte" />
+            <Field name="w" source="TextInput:" type="Byte" />
+            <Field name="current" size="7" source="TextInput:" type="String" />
+            <Field name="x_diff" source="TextInput:" type="Int16" />
+            <Field name="y_diff" source="TextInput:" type="Int16" />
+            <Field name="z_diff" source="TextInput:" type="Int16" />
+            <Field name="w_diff" source="TextInput:" type="Byte" />
+            <Field name="x_lookup" source="Formula: [x] + [x_diff]" type="Int32" />
+            <Field name="y_lookup" source="Formula: [y] + [y_diff]" type="Int32" />
+            <Field name="z_lookup" source="Formula: [z] + [z_diff]" type="Int32" />
+            <Field name="w_lookup" source="Formula: [w] + [w_diff]" type="Int32" />
+            <Field name="lookup" size="11" source="Formula: ToString([x_lookup]) +&#xA;',' +&#xA;ToString([y_lookup]) +&#xA;',' +&#xA;ToString([z_lookup]) +&#xA;',' +&#xA;ToString([w_lookup])" type="String" />
+            <Field name="status_lookup" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFindReplace" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="450" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="status" selected="True" rename="status_lookup" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status_lookup" source="TextInput:" type="Byte" />
+            <Field name="x" source="TextInput:" type="Byte" />
+            <Field name="y" source="TextInput:" type="Byte" />
+            <Field name="z" source="TextInput:" type="Byte" />
+            <Field name="w" source="TextInput:" type="Byte" />
+            <Field name="current" size="7" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="762" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="True" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="status" selected="True" />
+            <SelectField field="x" selected="True" />
+            <SelectField field="y" selected="True" />
+            <SelectField field="z" selected="True" />
+            <SelectField field="w" selected="True" />
+            <SelectField field="current" selected="True" />
+            <SelectField field="x_diff" selected="False" />
+            <SelectField field="y_diff" selected="False" />
+            <SelectField field="z_diff" selected="False" />
+            <SelectField field="w_diff" selected="False" />
+            <SelectField field="status_lookup" selected="True" />
+            <SelectField field="x_lookup" selected="True" />
+            <SelectField field="y_lookup" selected="True" />
+            <SelectField field="z_lookup" selected="True" />
+            <SelectField field="w_lookup" selected="True" />
+            <SelectField field="lookup" selected="True" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="TextInput:" type="Byte" />
+            <Field name="x" source="TextInput:" type="Byte" />
+            <Field name="y" source="TextInput:" type="Byte" />
+            <Field name="z" source="TextInput:" type="Byte" />
+            <Field name="w" source="TextInput:" type="Byte" />
+            <Field name="current" size="7" source="TextInput:" type="String" />
+            <Field name="status_lookup" source="TextInput:" type="Byte" />
+            <Field name="x_lookup" source="Formula: [x] + [x_diff]" type="Int32" />
+            <Field name="y_lookup" source="Formula: [y] + [y_diff]" type="Int32" />
+            <Field name="z_lookup" source="Formula: [z] + [z_diff]" type="Int32" />
+            <Field name="w_lookup" source="Formula: [w] + [w_diff]" type="Int32" />
+            <Field name="lookup" size="11" source="Formula: ToString([x_lookup]) +&#xA;',' +&#xA;ToString([y_lookup]) +&#xA;',' +&#xA;ToString([z_lookup]) +&#xA;',' +&#xA;ToString([w_lookup])" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.CrossTab.CrossTab">
+        <Position x="1062" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <GroupFields>
+            <Field field="status_lookup" />
+            <Field field="x_lookup" />
+            <Field field="y_lookup" />
+            <Field field="z_lookup" />
+            <Field field="w_lookup" />
+            <Field field="lookup" />
+          </GroupFields>
+          <HeaderField field="status" />
+          <DataField field="x" />
+          <Methods>
+            <Method method="Count" />
+          </Methods>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status_lookup" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="x_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="lookup" size="11" source="CrossTab:Group:Count:" type="String" />
+            <Field name="Count_0" source="CrossTab:Header:status:0:CountNonNulls:" type="Double" />
+            <Field name="Count_1" source="CrossTab:Header:status:1:CountNonNulls:" type="Double" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="status_lookup" order="Asc" />
+            <Field field="x_lookup" order="Asc" />
+            <Field field="y_lookup" order="Asc" />
+            <Field field="z_lookup" order="Asc" />
+            <Field field="w_lookup" order="Asc" />
+            <Field field="lookup" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxCrossTab" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="906" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="if IsNull([status_lookup])&#xA;then 0&#xA;else [status_lookup]&#xA;endif" field="status_lookup" size="1" type="Byte" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[status_lookup
+]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[status_lookup = if IsNull([status_lookup])
+then 0
+else [status_lookup]
+endif
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="TextInput:" type="Byte" />
+            <Field name="x" source="TextInput:" type="Byte" />
+            <Field name="y" source="TextInput:" type="Byte" />
+            <Field name="z" source="TextInput:" type="Byte" />
+            <Field name="w" source="TextInput:" type="Byte" />
+            <Field name="current" size="7" source="TextInput:" type="String" />
+            <Field name="status_lookup" source="Formula: if IsNull([status_lookup])&#xA;then 0&#xA;else [status_lookup]&#xA;endif" type="Byte" />
+            <Field name="x_lookup" source="Formula: [x] + [x_diff]" type="Int32" />
+            <Field name="y_lookup" source="Formula: [y] + [y_diff]" type="Int32" />
+            <Field name="z_lookup" source="Formula: [z] + [z_diff]" type="Int32" />
+            <Field name="w_lookup" source="Formula: [w] + [w_diff]" type="Int32" />
+            <Field name="lookup" size="11" source="Formula: ToString([x_lookup]) +&#xA;',' +&#xA;ToString([y_lookup]) +&#xA;',' +&#xA;ToString([z_lookup]) +&#xA;',' +&#xA;ToString([w_lookup])" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1362" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="if [status_lookup] = 1&#xA;then &#xA;&#xA;if [Count_1] = 2 or [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;elseif [status_lookup] = 0&#xA;then &#xA;&#xA;if [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;else [status_lookup]&#xA;endif&#xA;" field="new_status_lookup" size="1" type="Byte" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>new_status_lookup</AnnotationText>
+          <DefaultAnnotationText>new_status_lookup = if [status_lookup] = 1
+then 
+
+if [Count_1] = 2 or [Count_1] ...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status_lookup" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="x_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="lookup" size="11" source="CrossTab:Group:Count:" type="String" />
+            <Field name="Count_0" source="(Multiple Sources)" type="Double" />
+            <Field name="Count_1" source="(Multiple Sources)" type="Double" />
+            <Field name="new_status_lookup" source="Formula: if [status_lookup] = 1&#xA;then &#xA;&#xA;if [Count_1] = 2 or [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;elseif [status_lookup] = 0&#xA;then &#xA;&#xA;if [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;else [status_lookup]&#xA;endif&#xA;" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1518" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="True" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="status_lookup" selected="False" />
+            <SelectField field="new_status_lookup" selected="True" rename="status" />
+            <SelectField field="x_lookup" selected="True" rename="x" />
+            <SelectField field="y_lookup" selected="True" rename="y" />
+            <SelectField field="z_lookup" selected="True" rename="z" />
+            <SelectField field="w_lookup" selected="True" rename="w" />
+            <SelectField field="lookup" selected="True" rename="current" />
+            <SelectField field="Count_0" selected="False" />
+            <SelectField field="Count_1" selected="False" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="Formula: if [status_lookup] = 1&#xA;then &#xA;&#xA;if [Count_1] = 2 or [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;elseif [status_lookup] = 0&#xA;then &#xA;&#xA;if [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;else [status_lookup]&#xA;endif&#xA;" type="Byte" />
+            <Field name="x" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="current" size="11" source="CrossTab:Group:Count:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+        <Position x="1662" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SortInfo locale="0">
+            <Field field="w" order="Ascending" />
+            <Field field="z" order="Ascending" />
+            <Field field="y" order="Ascending" />
+            <Field field="x" order="Ascending" />
+          </SortInfo>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[ ]]></AnnotationText>
+          <DefaultAnnotationText>w - Ascending
+z - Ascending
+y - Ascending
+x - Ascending</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="Formula: if [status_lookup] = 1&#xA;then &#xA;&#xA;if [Count_1] = 2 or [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;elseif [status_lookup] = 0&#xA;then &#xA;&#xA;if [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;else [status_lookup]&#xA;endif&#xA;" type="Byte" />
+            <Field name="x" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="current" size="11" source="CrossTab:Group:Count:" type="String" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="w" order="Ascending" />
+            <Field field="z" order="Ascending" />
+            <Field field="y" order="Ascending" />
+            <Field field="x" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="102" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input</Name>
+          <Abbrev />
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="9" />
+              <Fields>
+                <Field name="status" />
+                <Field name="x" />
+                <Field name="y" />
+                <Field name="z" />
+                <Field name="w" />
+                <Field name="current" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>0</c>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>1,1,0,0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>2</c>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>2,1,0,0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>3</c>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>3,1,0,0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>1</c>
+                  <c>2</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>1,2,0,0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>2</c>
+                  <c>2</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>2,2,0,0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>3</c>
+                  <c>2</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>3,2,0,0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>3</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>1,3,0,0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>2</c>
+                  <c>3</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>2,3,0,0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>3</c>
+                  <c>3</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>3,3,0,0</c>
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Input</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="TextInput:" type="Byte" />
+            <Field name="x" source="TextInput:" type="Byte" />
+            <Field name="y" source="TextInput:" type="Byte" />
+            <Field name="z" source="TextInput:" type="Byte" />
+            <Field name="w" source="TextInput:" type="Byte" />
+            <Field name="current" size="7" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="102" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input - Diffs</Name>
+          <Abbrev>D</Abbrev>
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="26" />
+              <Fields>
+                <Field name="x_diff" />
+                <Field name="y_diff" />
+                <Field name="z_diff" />
+                <Field name="w_diff" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>-1</c>
+                  <c>-1</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>-1</c>
+                  <c>-1</c>
+                  <c>0</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>-1</c>
+                  <c>-1</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>-1</c>
+                  <c>0</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>-1</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>-1</c>
+                  <c>0</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>-1</c>
+                  <c>1</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>-1</c>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>-1</c>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>-1</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>-1</c>
+                  <c>0</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>-1</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>1</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>0</c>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>-1</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>-1</c>
+                  <c>0</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>-1</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>0</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>-1</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>0</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>0</c>
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>D Input</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="x_diff" source="TextInput:" type="Int16" />
+            <Field name="y_diff" source="TextInput:" type="Int16" />
+            <Field name="z_diff" source="TextInput:" type="Int16" />
+            <Field name="w_diff" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="2250" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - Iterative</Name>
+          <Abbrev>I</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>I Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="15">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1806" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[Engine.IterationNumber] + 1" field="iteration" size="2" type="Int16" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[iteration
+]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[iteration = [Engine.IterationNumber] + 1
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="Formula: if [status_lookup] = 1&#xA;then &#xA;&#xA;if [Count_1] = 2 or [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;elseif [status_lookup] = 0&#xA;then &#xA;&#xA;if [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;else [status_lookup]&#xA;endif&#xA;" type="Byte" />
+            <Field name="x" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="current" size="11" source="CrossTab:Group:Count:" type="String" />
+            <Field name="iteration" source="Formula: [Engine.IterationNumber] + 1" type="Int16" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="w" order="Ascending" />
+            <Field field="z" order="Ascending" />
+            <Field field="y" order="Ascending" />
+            <Field field="x" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="1950" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>&lt;</Operator>
+            <Field>iteration</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2020-12-17 18:25:40</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>6</Operand>
+              <StartDate>2020-12-17 18:25:40</StartDate>
+              <EndDate>2020-12-17 18:25:40</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[iteration] &lt; 6</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="status" source="Formula: if [status_lookup] = 1&#xA;then &#xA;&#xA;if [Count_1] = 2 or [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;elseif [status_lookup] = 0&#xA;then &#xA;&#xA;if [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;else [status_lookup]&#xA;endif&#xA;" type="Byte" />
+            <Field name="x" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="current" size="11" source="CrossTab:Group:Count:" type="String" />
+            <Field name="iteration" source="Formula: [Engine.IterationNumber] + 1" type="Int16" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="w" order="Ascending" />
+            <Field field="z" order="Ascending" />
+            <Field field="y" order="Ascending" />
+            <Field field="x" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="status" source="Formula: if [status_lookup] = 1&#xA;then &#xA;&#xA;if [Count_1] = 2 or [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;elseif [status_lookup] = 0&#xA;then &#xA;&#xA;if [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;else [status_lookup]&#xA;endif&#xA;" type="Byte" />
+            <Field name="x" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="current" size="11" source="CrossTab:Group:Count:" type="String" />
+            <Field name="iteration" source="Formula: [Engine.IterationNumber] + 1" type="Int16" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="w" order="Ascending" />
+            <Field field="z" order="Ascending" />
+            <Field field="y" order="Ascending" />
+            <Field field="x" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="1950" y="426" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - Data</Name>
+          <Abbrev>D</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>D Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="2094" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="iteration" selected="False" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status" source="Formula: if [status_lookup] = 1&#xA;then &#xA;&#xA;if [Count_1] = 2 or [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;elseif [status_lookup] = 0&#xA;then &#xA;&#xA;if [Count_1] = 3&#xA;then 1&#xA;else 0&#xA;endif&#xA;&#xA;else [status_lookup]&#xA;endif&#xA;" type="Byte" />
+            <Field name="x" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="current" size="11" source="CrossTab:Group:Count:" type="String" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="w" order="Ascending" />
+            <Field field="z" order="Ascending" />
+            <Field field="y" order="Ascending" />
+            <Field field="x" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="19">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Union.Union">
+        <Position x="1206" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ByName_ErrorMode>Ignore</ByName_ErrorMode>
+          <ByName_OutputMode>All</ByName_OutputMode>
+          <Mode>ByName</Mode>
+          <SetOutputOrder value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="status_lookup" source="CrossTab:Group:Count:" type="Byte" />
+            <Field name="x_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="y_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="z_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="w_lookup" source="CrossTab:Group:Count:" type="Int32" />
+            <Field name="lookup" size="11" source="CrossTab:Group:Count:" type="String" />
+            <Field name="Count_0" source="(Multiple Sources)" type="Double" />
+            <Field name="Count_1" source="(Multiple Sources)" type="Double" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnion" />
+    </Node>
+    <Node ToolID="20">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="906" y="402" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="0" />
+          <Fields>
+            <Field name="Count_0" />
+            <Field name="Count_1" />
+          </Fields>
+          <Data />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Count_0" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="Count_1" size="1073741823" source="TextInput:" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="21">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1062" y="402" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Count_0" selected="True" type="Double" size="8" />
+            <SelectField field="Count_1" selected="True" type="Double" size="8" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Count_0" source="TextInput:" type="Double" />
+            <Field name="Count_1" source="TextInput:" type="Double" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="3" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="3" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="19" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="21" Connection="Output" />
+      <Destination ToolID="19" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="1" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="1" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="16" Connection="True" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="20" Connection="Output" />
+      <Destination ToolID="21" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="False" />
+    <ZoomLevel value="-2" />
+    <LayoutType>Horizontal</LayoutType>
+    <Constants>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Output (17)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+    </Constants>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>day_17_macro_1</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="False" />
+    </Events>
+    <RuntimeProperties>
+      <Actions />
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (12)</Name>
+          <ToolId value="12" />
+          <Questions>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description />
+              <Name>Macro Input (11)</Name>
+              <ToolId value="11" />
+            </Question>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description />
+              <Name>Macro Input (13)</Name>
+              <ToolId value="13" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (14)</Description>
+              <Name>Macro Output (14)</Name>
+              <ToolId value="14" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (17)</Description>
+              <Name>Macro Output (17)</Name>
+              <ToolId value="17" />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="39" />
+      <MacroInputs />
+      <MacroOutputs />
+      <IterativeMacro>
+        <Input>Input</Input>
+        <Output>Output - Iterative</Output>
+        <IterationLimit value="100" />
+        <LimitBehavior>Error</LimitBehavior>
+        <OutputMode>AllSame</OutputMode>
+      </IterativeMacro>
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="14" Selected="True" />
+        <Tool ToolId="17" Selected="True" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>
