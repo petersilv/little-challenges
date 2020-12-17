@@ -3,7 +3,7 @@
   <Nodes>
     <Node ToolID="1">
       <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
-        <Position x="66" y="486" />
+        <Position x="66" y="522" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -36,61 +36,9 @@
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
     </Node>
-    <Node ToolID="2">
-      <GuiSettings Plugin="AlteryxConnectorGui.Download.Download">
-        <Position x="738" y="474" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <URLField>URL</URLField>
-          <OutputMode>String</OutputMode>
-          <CodePage>65001</CodePage>
-          <EncodeURLs value="True" />
-          <Headers>
-            <NameValues />
-            <Fields orderChanged="False">
-              <Field name="Cookie" />
-              <Field name="Day" selected="False" />
-              <Field name="URL" selected="False" />
-              <Field name="*Unknown" selected="False" />
-            </Fields>
-          </Headers>
-          <Payload>
-            <HTTPAction>GET</HTTPAction>
-            <QueryStringBodyMode>Compose</QueryStringBodyMode>
-            <ComposeNameValues />
-            <ComposeFields orderChanged="False">
-              <Field name="Day" selected="False" />
-              <Field name="URL" selected="False" />
-              <Field name="Cookie" selected="False" />
-              <Field name="*Unknown" selected="False" />
-            </ComposeFields>
-          </Payload>
-          <UserName />
-          <Password />
-          <numConnections>2</numConnections>
-          <Timeout>600</Timeout>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Day" size="4" source="TextInput:" type="V_String" />
-            <Field name="URL" size="255" source="Formula: Replace([URL], '{day}', [Day])" type="V_String" />
-            <Field name="Cookie" size="2048" source="TextInput:" type="V_String" />
-            <Field name="DownloadData" size="1073741823" source="Download" type="V_WString" />
-            <Field name="DownloadHeaders" size="2147483647" source="Download" type="V_String" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxConnectorEngine.dll" EngineDllEntryPoint="AlteryxDownload" />
-    </Node>
     <Node ToolID="3">
       <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="222" y="486" />
+        <Position x="222" y="522" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -120,7 +68,7 @@
     </Node>
     <Node ToolID="4">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="378" y="486" />
+        <Position x="378" y="522" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -145,34 +93,6 @@
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
     </Node>
-    <Node ToolID="5">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="1086" y="474" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <OrderChanged value="False" />
-          <CommaDecimal value="False" />
-          <SelectFields>
-            <SelectField field="Day" selected="True" />
-            <SelectField field="DownloadData" selected="True" rename="Input" />
-            <SelectField field="*Unknown" selected="False" />
-          </SelectFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Day" size="4" source="TextInput:" type="V_String" />
-            <Field name="Input" size="1073741823" source="Download" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
-    </Node>
     <Node ToolID="6">
       <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
         <Position x="0" y="0" width="59" height="59" />
@@ -188,7 +108,7 @@
     </Node>
     <Node ToolID="7">
       <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
-        <Position x="1938" y="486" />
+        <Position x="2370" y="522" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -257,115 +177,9 @@
         </Annotation>
       </Properties>
     </Node>
-    <Node ToolID="12">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Message.Message">
-        <Position x="906" y="474" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <When>Filter</When>
-          <Filter>!Contains([DownloadHeaders],"200")</Filter>
-          <Type>ErrorStop</Type>
-          <Priority>High</Priority>
-          <Transient>False</Transient>
-          <MessageExpression>[DownloadHeaders]</MessageExpression>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Day" size="4" source="TextInput:" type="V_String" />
-            <Field name="URL" size="255" source="Formula: Replace([URL], '{day}', [Day])" type="V_String" />
-            <Field name="Cookie" size="2048" source="TextInput:" type="V_String" />
-            <Field name="DownloadData" size="1073741823" source="Download" type="V_WString" />
-            <Field name="DownloadHeaders" size="2147483647" source="Download" type="V_String" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMessage" />
-    </Node>
-    <Node ToolID="14">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="1422" y="474" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <OrderChanged value="False" />
-          <CommaDecimal value="False" />
-          <SelectFields>
-            <SelectField field="Input" selected="True" />
-            <SelectField field="*Unknown" selected="False" />
-          </SelectFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Input" size="1073741823" source="Formula: Trim([Input])" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
-    </Node>
-    <Node ToolID="16">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
-        <Position x="1590" y="474" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <Field>Input</Field>
-          <Delimeters value="\n" />
-          <NumFields value="1" />
-          <Flags value="0" />
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field description="TextToColumns: Parsed from Input" name="Input" size="1073741823" source="TextToColumns: Parsed from Input" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
-    </Node>
-    <Node ToolID="18">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="1254" y="474" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <FormulaFields>
-            <FormulaField expression="Trim([Input])" field="Input" size="1073741823" type="V_WString" />
-          </FormulaFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <AnnotationText>Trim</AnnotationText>
-          <DefaultAnnotationText><![CDATA[Input = Trim([Input])
-]]></DefaultAnnotationText>
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Day" size="4" source="TextInput:" type="V_String" />
-            <Field name="Input" size="1073741823" source="Formula: Trim([Input])" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
-    </Node>
     <Node ToolID="20">
       <GuiSettings Plugin="AlteryxGuiToolkit.Questions.CheckBoxGroup.CheckBoxGroup">
-        <Position x="1290" y="66" width="59" height="59" />
+        <Position x="1746" y="66" width="59" height="59" />
       </GuiSettings>
       <Properties>
         <Configuration />
@@ -379,7 +193,7 @@
     </Node>
     <Node ToolID="21">
       <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
-        <Position x="1302" y="174" width="59" height="59" />
+        <Position x="1758" y="174" width="59" height="59" />
       </GuiSettings>
       <Properties>
         <Configuration />
@@ -392,7 +206,7 @@
     </Node>
     <Node ToolID="24">
       <GuiSettings Plugin="AlteryxGuiToolkit.Questions.TextBox.QuestionTextBox">
-        <Position x="978" y="66" width="59" height="59" />
+        <Position x="1302" y="66" width="59" height="59" />
       </GuiSettings>
       <Properties>
         <Configuration />
@@ -406,7 +220,7 @@
     </Node>
     <Node ToolID="25">
       <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
-        <Position x="1590" y="174" width="59" height="59" />
+        <Position x="2046" y="174" width="59" height="59" />
       </GuiSettings>
       <Properties>
         <Configuration />
@@ -417,181 +231,9 @@
         </Annotation>
       </Properties>
     </Node>
-    <Node ToolID="26">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Detour.Detour">
-        <Position x="558" y="486" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <DetourRight value="False" />
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Left">
-          <RecordInfo>
-            <Field name="Day" size="4" source="TextInput:" type="V_String" />
-            <Field name="URL" size="255" source="Formula: Replace([URL], '{day}', [Day])" type="V_String" />
-            <Field name="Cookie" size="2048" source="TextInput:" type="V_String" />
-          </RecordInfo>
-        </MetaInfo>
-        <MetaInfo connection="Right">
-          <RecordInfo>
-            <Field name="Day" size="4" source="TextInput:" type="V_String" />
-            <Field name="URL" size="255" source="Formula: Replace([URL], '{day}', [Day])" type="V_String" />
-            <Field name="Cookie" size="2048" source="TextInput:" type="V_String" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDetour" />
-    </Node>
-    <Node ToolID="27">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.DetourEnd.DetourEnd">
-        <Position x="1770" y="486" />
-      </GuiSettings>
-      <Properties>
-        <Configuration />
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field description="TextToColumns: Parsed from Input" name="Input" size="1073741823" source="TextToColumns: Parsed from Input" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDetourEnd" />
-    </Node>
-    <Node ToolID="28">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.DynamicInput.DynamicInput">
-        <Position x="1254" y="618" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <InputConfiguration>
-            <Configuration>
-              <Passwords />
-              <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">../data/input_01.txt</File>
-              <FormatSpecificOptions>
-                <HeaderRow>False</HeaderRow>
-                <IgnoreErrors>False</IgnoreErrors>
-                <AllowShareWrite>False</AllowShareWrite>
-                <ImportLine>1</ImportLine>
-                <FieldLen>1073741823</FieldLen>
-                <SingleThreadRead>False</SingleThreadRead>
-                <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
-                <Delimeter>\0</Delimeter>
-                <QuoteRecordBreak>False</QuoteRecordBreak>
-                <CodePage>65001</CodePage>
-              </FormatSpecificOptions>
-            </Configuration>
-          </InputConfiguration>
-          <Mode>ReadList</Mode>
-          <ReadList_Field>FilePath</ReadList_Field>
-          <ReadList_Type>Path</ReadList_Type>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Field_1" size="1073741823" source="File: \\Mac\My Drive\Peter Silvester\Side Projects\little-challenges\advent-of-code\2020\data\input_01.txt" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDynamicInput" />
-    </Node>
-    <Node ToolID="29">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="978" y="618" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <FormulaFields>
-            <FormulaField expression="PadLeft([Day], 2, '0')" field="Day" size="4" type="V_String" />
-            <FormulaField expression="'../data/input_.txt'" field="FilePath" size="255" type="V_String" />
-            <FormulaField expression="REGEX_Replace([FilePath], '(.*?)(\.\w+)$', '$1') &#xA;+ [Day] &#xA;+ REGEX_Replace([FilePath], '(.*?)(\.\w+)$', '$2') " field="FilePath" size="255" type="V_String" />
-          </FormulaFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <AnnotationText>Day</AnnotationText>
-          <DefaultAnnotationText>Day = PadLeft([Day], 2, '0')
-FilePath = '../data/input_.txt'
-FilePath = REGEX_Re...</DefaultAnnotationText>
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Day" size="4" source="Formula: PadLeft([Day], 2, '0')" type="V_String" />
-            <Field name="FilePath" size="255" source="Formula: REGEX_Replace([FilePath], '(.*?)(\.\w+)$', '$1') &#xA;+ [Day] &#xA;+ REGEX_Replace([FilePath], '(.*?)(\.\w+)$', '$2') " type="V_String" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
-    </Node>
-    <Node ToolID="30">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="738" y="618" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <OrderChanged value="False" />
-          <CommaDecimal value="False" />
-          <SelectFields>
-            <SelectField field="URL" selected="False" />
-            <SelectField field="Cookie" selected="False" />
-            <SelectField field="*Unknown" selected="True" />
-          </SelectFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Day" size="4" source="TextInput:" type="V_String" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
-    </Node>
-    <Node ToolID="31">
-      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="1422" y="618" />
-      </GuiSettings>
-      <Properties>
-        <Configuration>
-          <OrderChanged value="False" />
-          <CommaDecimal value="False" />
-          <SelectFields>
-            <SelectField field="Field_1" selected="True" rename="Input" />
-            <SelectField field="*Unknown" selected="True" />
-          </SelectFields>
-        </Configuration>
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText />
-          <Left value="False" />
-        </Annotation>
-        <MetaInfo connection="Output">
-          <RecordInfo>
-            <Field name="Input" size="1073741823" source="File: \\Mac\My Drive\Peter Silvester\Side Projects\little-challenges\advent-of-code\2020\data\input_01.txt" type="V_WString" />
-          </RecordInfo>
-        </MetaInfo>
-      </Properties>
-      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
-    </Node>
     <Node ToolID="32">
       <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
-        <Position x="990" y="174" width="59" height="59" />
+        <Position x="1314" y="174" width="59" height="59" />
       </GuiSettings>
       <Properties>
         <Configuration />
@@ -604,7 +246,7 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
     </Node>
     <Node ToolID="34">
       <GuiSettings Plugin="AlteryxGuiToolkit.Questions.RadioButtonGroup.RadioButtonGroup">
-        <Position x="762" y="66" width="59" height="59" />
+        <Position x="882" y="66" width="59" height="59" />
       </GuiSettings>
       <Properties>
         <Configuration />
@@ -618,34 +260,21 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
     </Node>
     <Node ToolID="35">
       <GuiSettings Plugin="AlteryxGuiToolkit.Questions.RadioButtonGroup.RadioButtonGroup">
-        <Position x="558" y="66" width="59" height="59" />
+        <Position x="678" y="66" width="59" height="59" />
       </GuiSettings>
       <Properties>
         <Configuration />
         <Annotation DisplayMode="0">
           <Name />
-          <AnnotationText>Read Input from file</AnnotationText>
+          <AnnotationText>Read Input from File</AnnotationText>
           <DefaultAnnotationText>Radio Button (35)</DefaultAnnotationText>
-          <Left value="False" />
-        </Annotation>
-      </Properties>
-    </Node>
-    <Node ToolID="36">
-      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
-        <Position x="570" y="174" width="59" height="59" />
-      </GuiSettings>
-      <Properties>
-        <Configuration />
-        <Annotation DisplayMode="0">
-          <Name />
-          <DefaultAnnotationText>Update Value</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
       </Properties>
     </Node>
     <Node ToolID="37">
       <GuiSettings Plugin="AlteryxGuiToolkit.Questions.TextBox.QuestionTextBox">
-        <Position x="1578" y="54" width="59" height="59" />
+        <Position x="2034" y="66" width="59" height="59" />
       </GuiSettings>
       <Properties>
         <Configuration />
@@ -657,9 +286,624 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
         </Annotation>
       </Properties>
     </Node>
+    <Node ToolID="39">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.RadioButtonGroup.RadioButtonGroup">
+        <Position x="486" y="66" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Enter Test Input</AnnotationText>
+          <DefaultAnnotationText>Radio Button (34)</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="45">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.TextBox.QuestionTextBox">
+        <Position x="1542" y="66" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>File Path</AnnotationText>
+          <DefaultAnnotationText>Text Box (24)</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="46">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
+        <Position x="1554" y="174" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Update Value</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="49">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Union.Union">
+        <Position x="2202" y="522" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ByName_ErrorMode>Warning</ByName_ErrorMode>
+          <ByName_OutputMode>All</ByName_OutputMode>
+          <Mode>ByName</Mode>
+          <SetOutputOrder value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Input" size="1073741823" source="(Multiple Sources)" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnion" />
+    </Node>
+    <Node ToolID="58">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
+        <Position x="498" y="174" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Update Value</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="59">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
+        <Position x="690" y="174" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Update Value</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="60">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
+        <Position x="894" y="174" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Update Value</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="51">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="785" y="653" width="1153" height="162.0001" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>File</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="28">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DynamicInput.DynamicInput">
+            <Position x="1686" y="702" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <InputConfiguration>
+                <Configuration>
+                  <Passwords />
+                  <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">../data/input_01.txt</File>
+                  <FormatSpecificOptions>
+                    <HeaderRow>False</HeaderRow>
+                    <IgnoreErrors>False</IgnoreErrors>
+                    <AllowShareWrite>False</AllowShareWrite>
+                    <ImportLine>1</ImportLine>
+                    <FieldLen>1073741823</FieldLen>
+                    <SingleThreadRead>False</SingleThreadRead>
+                    <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+                    <Delimeter>\0</Delimeter>
+                    <QuoteRecordBreak>False</QuoteRecordBreak>
+                    <CodePage>65001</CodePage>
+                  </FormatSpecificOptions>
+                </Configuration>
+              </InputConfiguration>
+              <Mode>ReadList</Mode>
+              <ReadList_Field>FilePath</ReadList_Field>
+              <ReadList_Type>Path</ReadList_Type>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Field_1" size="1073741823" source="File: \\Mac\My Drive\Peter Silvester\Side Projects\little-challenges\advent-of-code\2020\data\input_01.txt" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDynamicInput" />
+        </Node>
+        <Node ToolID="29">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1278" y="702" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="PadLeft([Day], 2, '0')" field="Day" size="4" type="V_String" />
+                <FormulaField expression="'../data/input_.txt'" field="FilePath" size="255" type="V_String" />
+                <FormulaField expression="REGEX_Replace([FilePath], '(.*?)(\.\w+)$', '$1') &#xA;+ [Day] &#xA;+ REGEX_Replace([FilePath], '(.*?)(\.\w+)$', '$2') " field="FilePath" size="255" type="V_String" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <AnnotationText>Day</AnnotationText>
+              <DefaultAnnotationText>Day = PadLeft([Day], 2, '0')
+FilePath = '../data/input_.txt'
+FilePath = REGEX_Re...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="Formula: PadLeft([Day], 2, '0')" type="V_String" />
+                <Field name="FilePath" size="255" source="Formula: REGEX_Replace([FilePath], '(.*?)(\.\w+)$', '$1') &#xA;+ [Day] &#xA;+ REGEX_Replace([FilePath], '(.*?)(\.\w+)$', '$2') " type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="30">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1002" y="702" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="URL" selected="False" />
+                <SelectField field="Cookie" selected="False" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="TextInput:" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="31">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1854" y="702" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Field_1" selected="True" rename="Input" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Input" size="1073741823" source="File: \\Mac\My Drive\Peter Silvester\Side Projects\little-challenges\advent-of-code\2020\data\input_01.txt" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="57">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="810" y="750.0001" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text><![CDATA[ ]]></Text>
+              <Font name="Arial" size="11.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="3" />
+              <Justification Justification="1" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="52">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="977" y="473" width="1129" height="149" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Download</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="2">
+          <GuiSettings Plugin="AlteryxConnectorGui.Download.Download">
+            <Position x="1002" y="522" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <URLField>URL</URLField>
+              <OutputMode>String</OutputMode>
+              <CodePage>65001</CodePage>
+              <EncodeURLs value="True" />
+              <Headers>
+                <NameValues />
+                <Fields orderChanged="False">
+                  <Field name="Cookie" />
+                  <Field name="Day" selected="False" />
+                  <Field name="URL" selected="False" />
+                  <Field name="*Unknown" selected="False" />
+                </Fields>
+              </Headers>
+              <Payload>
+                <HTTPAction>GET</HTTPAction>
+                <QueryStringBodyMode>Compose</QueryStringBodyMode>
+                <ComposeNameValues />
+                <ComposeFields orderChanged="False">
+                  <Field name="Day" selected="False" />
+                  <Field name="URL" selected="False" />
+                  <Field name="Cookie" selected="False" />
+                  <Field name="*Unknown" selected="False" />
+                </ComposeFields>
+              </Payload>
+              <UserName />
+              <Password />
+              <numConnections>2</numConnections>
+              <Timeout>600</Timeout>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="TextInput:" type="V_String" />
+                <Field name="URL" size="255" source="Formula: Replace([URL], '{day}', [Day])" type="V_String" />
+                <Field name="Cookie" size="2048" source="TextInput:" type="V_String" />
+                <Field name="DownloadData" size="1073741823" source="Download" type="V_WString" />
+                <Field name="DownloadHeaders" size="2147483647" source="Download" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxConnectorEngine.dll" EngineDllEntryPoint="AlteryxDownload" />
+        </Node>
+        <Node ToolID="5">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1374" y="522" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Day" selected="True" />
+                <SelectField field="DownloadData" selected="True" rename="Input" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="TextInput:" type="V_String" />
+                <Field name="Input" size="1073741823" source="Download" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="12">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Message.Message">
+            <Position x="1182" y="522.0001" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <When>Filter</When>
+              <Filter>!Contains([DownloadHeaders],"200")</Filter>
+              <Type>ErrorStop</Type>
+              <Priority>High</Priority>
+              <Transient>False</Transient>
+              <MessageExpression>[DownloadHeaders]</MessageExpression>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="TextInput:" type="V_String" />
+                <Field name="URL" size="255" source="Formula: Replace([URL], '{day}', [Day])" type="V_String" />
+                <Field name="Cookie" size="2048" source="TextInput:" type="V_String" />
+                <Field name="DownloadData" size="1073741823" source="Download" type="V_WString" />
+                <Field name="DownloadHeaders" size="2147483647" source="Download" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMessage" />
+        </Node>
+        <Node ToolID="14">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1854" y="522" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Input" selected="True" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Input" size="1073741823" source="Formula: Trim([Input])" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="16">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+            <Position x="2022" y="522" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>Input</Field>
+              <Delimeters value="\n" />
+              <NumFields value="1" />
+              <Flags value="0" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field description="TextToColumns: Parsed from Input" name="Input" size="1073741823" source="TextToColumns: Parsed from Input" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+        </Node>
+        <Node ToolID="18">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1686" y="522" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="Trim([Input])" field="Input" size="1073741823" type="V_WString" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <AnnotationText>Trim</AnnotationText>
+              <DefaultAnnotationText><![CDATA[Input = Trim([Input])
+]]></DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="TextInput:" type="V_String" />
+                <Field name="Input" size="1073741823" source="Formula: Trim([Input])" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="50">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="592.9999" y="832.9999" width="1345" height="162.0001" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Test</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="43">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1518" y="882" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="'TEST'" field="Input" size="1073741823" type="V_WString" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText><![CDATA[Input = 'TEST'
+]]></DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="TextInput:" type="V_String" />
+                <Field name="Input" size="1073741823" source="Formula: 'TEST'" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="44">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+            <Position x="1686" y="882" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>Input</Field>
+              <Delimeters value="\n" />
+              <NumFields value="1" />
+              <Flags value="0" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="TextInput:" type="V_String" />
+                <Field description="TextToColumns: Parsed from Input" name="Input" size="1073741823" source="TextToColumns: Parsed from Input" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+        </Node>
+        <Node ToolID="47">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1002" y="881.9999" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Day" selected="True" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Day" size="4" source="TextInput:" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="48">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1854" y="882" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Input" selected="True" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field description="TextToColumns: Parsed from Input" name="Input" size="1073741823" source="TextToColumns: Parsed from Input" type="V_WString" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="53">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="617.9999" y="930.0001" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text><![CDATA[ ]]></Text>
+              <Font name="Arial" size="11.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="3" />
+              <Justification Justification="1" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
     <Node ToolID="19">
       <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
-        <Position x="1397" y="281" width="279" height="149" />
+        <Position x="1853" y="293" width="279" height="149" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -677,7 +921,7 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
       <ChildNodes>
         <Node ToolID="13">
           <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
-            <Position x="1590" y="330" />
+            <Position x="2046" y="342" />
           </GuiSettings>
           <Properties>
             <Configuration>
@@ -706,7 +950,7 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
         </Node>
         <Node ToolID="15">
           <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-            <Position x="1422" y="330" />
+            <Position x="1878" y="342" />
           </GuiSettings>
           <Properties>
             <Configuration>
@@ -739,24 +983,20 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
       <Destination ToolID="3" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="2" Connection="Output" />
-      <Destination ToolID="12" Connection="Input" />
-    </Connection>
-    <Connection>
       <Origin ToolID="3" Connection="Output" />
       <Destination ToolID="4" Connection="Input" />
     </Connection>
     <Connection>
       <Origin ToolID="4" Connection="Output" />
-      <Destination ToolID="26" Connection="Input" />
-    </Connection>
-    <Connection name="#2">
-      <Origin ToolID="36" Connection="Action" />
-      <Destination ToolID="26" Connection="Action" />
+      <Destination ToolID="2" Connection="Input" />
     </Connection>
     <Connection>
-      <Origin ToolID="5" Connection="Output" />
-      <Destination ToolID="18" Connection="Input" />
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="30" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="47" Connection="Input" />
     </Connection>
     <Connection name="#1">
       <Origin ToolID="8" Connection="Question" />
@@ -773,30 +1013,6 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
     <Connection name="#1">
       <Origin ToolID="10" Connection="Question" />
       <Destination ToolID="11" Connection="Question" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="12" Connection="Output" />
-      <Destination ToolID="5" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="14" Connection="Output" />
-      <Destination ToolID="16" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="16" Connection="Output" />
-      <Destination ToolID="27" Connection="Left" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="31" Connection="Output" />
-      <Destination ToolID="27" Connection="Right" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="18" Connection="Output" />
-      <Destination ToolID="14" Connection="Input" />
-    </Connection>
-    <Connection>
-      <Origin ToolID="18" Connection="Output" />
-      <Destination ToolID="15" Connection="Input" />
     </Connection>
     <Connection name="#1">
       <Origin ToolID="20" Connection="Question" />
@@ -818,17 +1034,57 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
       <Origin ToolID="15" Connection="Output" />
       <Destination ToolID="13" Connection="Input" />
     </Connection>
-    <Connection>
-      <Origin ToolID="26" Connection="Left" />
-      <Destination ToolID="2" Connection="Input" />
+    <Connection name="#2">
+      <Origin ToolID="32" Connection="Action" />
+      <Destination ToolID="29" Connection="Action" />
     </Connection>
     <Connection>
-      <Origin ToolID="26" Connection="Right" />
-      <Destination ToolID="30" Connection="Input" />
+      <Origin ToolID="30" Connection="Output" />
+      <Destination ToolID="29" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="34" Connection="Question" />
+      <Destination ToolID="60" Connection="Question" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="35" Connection="Question" />
+      <Destination ToolID="59" Connection="Question" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="37" Connection="Question" />
+      <Destination ToolID="25" Connection="Question" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="39" Connection="Question" />
+      <Destination ToolID="58" Connection="Question" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="45" Connection="Question" />
+      <Destination ToolID="46" Connection="Question" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="46" Connection="Action" />
+      <Destination ToolID="43" Connection="Action" />
     </Connection>
     <Connection>
-      <Origin ToolID="27" Connection="Output" />
+      <Origin ToolID="47" Connection="Output" />
+      <Destination ToolID="43" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="49" Connection="Output" />
       <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="58" Connection="Action" />
+      <Destination ToolID="50" Connection="Action" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="59" Connection="Action" />
+      <Destination ToolID="51" Connection="Action" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="60" Connection="Action" />
+      <Destination ToolID="52" Connection="Action" />
     </Connection>
     <Connection>
       <Origin ToolID="28" Connection="Output" />
@@ -838,21 +1094,49 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
       <Origin ToolID="29" Connection="Output" />
       <Destination ToolID="28" Connection="Input" />
     </Connection>
-    <Connection>
-      <Origin ToolID="30" Connection="Output" />
-      <Destination ToolID="29" Connection="Input" />
-    </Connection>
     <Connection name="#2">
-      <Origin ToolID="32" Connection="Action" />
-      <Destination ToolID="29" Connection="Action" />
+      <Origin ToolID="31" Connection="Output" />
+      <Destination ToolID="49" Connection="Input" />
     </Connection>
     <Connection name="#1">
-      <Origin ToolID="35" Connection="Question" />
-      <Destination ToolID="36" Connection="Question" />
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="49" Connection="Input" />
     </Connection>
-    <Connection name="#1">
-      <Origin ToolID="37" Connection="Question" />
-      <Destination ToolID="25" Connection="Question" />
+    <Connection name="#3">
+      <Origin ToolID="48" Connection="Output" />
+      <Destination ToolID="49" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="43" Connection="Output" />
+      <Destination ToolID="44" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="44" Connection="Output" />
+      <Destination ToolID="48" Connection="Input" />
     </Connection>
   </Connections>
   <Properties>
@@ -869,7 +1153,7 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
     <ShowAllMacroMessages value="False" />
     <ShowConnectionStatusIsOn value="True" />
     <ShowConnectionStatusOnlyWhenRunning value="False" />
-    <ZoomLevel value="-3" />
+    <ZoomLevel value="-5" />
     <LayoutType>Horizontal</LayoutType>
     <Constants>
       <Constant>
@@ -917,6 +1201,18 @@ FilePath = REGEX_Re...</DefaultAnnotationText>
       <Constant>
         <Namespace>Question</Namespace>
         <Name>Text Box (37)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Radio Button (39)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Text Box (45)</Name>
         <Value />
         <IsNumeric value="False" />
       </Constant>
@@ -1002,15 +1298,47 @@ endif</Expression>
               <Destination>29/FormulaFields/FormulaField[@field='FilePath']/@expression</Destination>
             </Action>
             <Action>
-              <Type>Dynamic</Type>
+              <Type>UpdateValue</Type>
               <Description />
-              <ToolId value="36" />
-              <Expression>{{INPUT}}</Expression>
-              <Destination>26/DetourRight/@value</Destination>
-              <Mapping>Update Detour Direction from Question</Mapping>
+              <ToolId value="46" />
+              <Mode>Simple</Mode>
+              <Variable />
+              <Replace value="True" />
+              <ReplaceText>TEST</ReplaceText>
+              <Destination>43/FormulaFields/FormulaField/@expression</Destination>
+            </Action>
+            <Action>
+              <Type>UpdateValueFormula</Type>
+              <Description />
+              <ToolId value="58" />
+              <Expression>if [#1] 
+then 'False'
+else 'True'
+endif</Expression>
+              <Destination>50/Disabled/@value</Destination>
               <Mode>Expression</Mode>
-              <DynamicConfiguration />
-              <DefaultConfiguration value="True" />
+            </Action>
+            <Action>
+              <Type>UpdateValueFormula</Type>
+              <Description />
+              <ToolId value="59" />
+              <Expression>if [#1] 
+then 'False'
+else 'True'
+endif</Expression>
+              <Destination>19/Disabled/@value</Destination>
+              <Mode>Expression</Mode>
+            </Action>
+            <Action>
+              <Type>UpdateValueFormula</Type>
+              <Description />
+              <ToolId value="60" />
+              <Expression>if [#1] 
+then 'False'
+else 'True'
+endif</Expression>
+              <Destination>52/Disabled/@value</Destination>
+              <Mode>Expression</Mode>
             </Action>
           </True>
         </NoCondition>
@@ -1093,6 +1421,26 @@ endif</Expression>
                   <Default>../data/input_.txt</Default>
                   <Password value="False" />
                   <Multiline value="False" />
+                  <Hidden value="False" />
+                </Question>
+              </Questions>
+              <Default value="False" />
+              <Collapsable value="True" />
+            </Question>
+            <Question>
+              <Type>RadioGroup</Type>
+              <Description>Enter Test Input</Description>
+              <Name>Radio Button (39)</Name>
+              <ToolId value="39" />
+              <Questions>
+                <Question>
+                  <Type>TextBox</Type>
+                  <Description>Test Input</Description>
+                  <Name>Text Box (45)</Name>
+                  <ToolId value="45" />
+                  <Default />
+                  <Password value="False" />
+                  <Multiline value="True" />
                   <Hidden value="False" />
                 </Question>
               </Questions>
