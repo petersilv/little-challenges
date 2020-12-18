@@ -1,0 +1,1637 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2020.4">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="654" y="366" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>[level] = [max_level]</Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[level] = [max_level]</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="1254" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>line_id</UpdateField_Name>
+          <CreateField_Name>output</CreateField_Name>
+          <CreateField_Type>Int64</CreateField_Type>
+          <CreateField_Size>8</CreateField_Size>
+          <OtherRows>NULL</OtherRows>
+          <NumRows value="2" />
+          <Expression>if [Row-1:value] = '+'
+then 
+
+if isnull([Row-2:output])
+then tonumber([value]) + tonumber([Row-2:value])
+else tonumber([value]) + [Row-2:output]
+endif
+
+elseif [Row-1:value] = '*'
+then 
+
+if isnull([Row-2:output])
+then tonumber([value]) * tonumber([Row-2:value])
+else tonumber([value]) * [Row-2:output]
+endif
+
+else NULL()
+endif</Expression>
+          <GroupByFields>
+            <Field field="line_id" />
+            <Field field="level_id" />
+          </GroupByFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>output</AnnotationText>
+          <DefaultAnnotationText>if [Row-1:value] = '+'
+then 
+
+if isnull([Row-2:output])
+then ...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="output" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="Int64" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+            <Field field="level_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="2298" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="level_id" selected="False" />
+            <SelectField field="value" selected="True" type="V_String" size="255" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="Summarize: GroupBy - line_id" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="Formula: [level]-1" type="Byte" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="value" size="255" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Union.Union">
+        <Position x="2442" y="558" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ByName_ErrorMode>Warning</ByName_ErrorMode>
+          <ByName_OutputMode>All</ByName_OutputMode>
+          <Mode>ByName</Mode>
+          <SetOutputOrder value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="(Multiple Sources)" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="(Multiple Sources)" type="Byte" />
+            <Field name="value" size="255" source="(Multiple Sources)" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnion" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+        <Position x="2586" y="558" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SortInfo locale="0">
+            <Field field="line_id" order="Ascending" />
+            <Field field="operation_id" order="Ascending" />
+          </SortInfo>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>line_id - Ascending
+operation_id - Ascending</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="(Multiple Sources)" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="(Multiple Sources)" type="Byte" />
+            <Field name="value" size="255" source="(Multiple Sources)" type="V_String" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="line_id" order="Ascending" />
+            <Field field="operation_id" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="2130" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[level]-1" field="level" size="1" type="Byte" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[level = [level]-1
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="Summarize: GroupBy - line_id" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="Formula: [level]-1" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Summarize: GroupBy - level_id" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="value" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="Int64" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="966" y="354" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>[value] not in ('(',')')</Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>not ( or )</AnnotationText>
+          <DefaultAnnotationText>[value] not in ('(',')')</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="822" y="354" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>Input</UpdateField_Name>
+          <CreateField_Name>level_id</CreateField_Name>
+          <CreateField_Type>Int16</CreateField_Type>
+          <CreateField_Size>2</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression>if [value] = '('
+then [Row-1:level_id]+1
+else [Row-1:level_id]
+endif</Expression>
+          <GroupByFields>
+            <Field field="line_id" />
+          </GroupByFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>level_id</AnnotationText>
+          <DefaultAnnotationText>if [value] = '('
+then [Row-1:level_id]+1
+else [Row-1:level_id...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="1890" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="line_id" action="GroupBy" rename="line_id" />
+            <SummarizeField field="operation_id" action="Last" rename="operation_id" />
+            <SummarizeField field="level" action="GroupBy" rename="level" />
+            <SummarizeField field="level_id" action="GroupBy" rename="level_id" />
+            <SummarizeField field="output" action="Last" rename="value" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="Summarize: GroupBy - line_id" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="Summarize: GroupBy - level" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Summarize: GroupBy - level_id" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="value" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="Int64" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+            <Field field="level" order="Asc" />
+            <Field field="level_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="330" y="450" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="level" action="Max" rename="max_level" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="max_level" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="150" y="354" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input</Name>
+          <Abbrev />
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="55" />
+              <Fields>
+                <Field name="line_id" />
+                <Field name="operation_id" />
+                <Field name="level" />
+                <Field name="value" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>2</c>
+                  <c>0</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>3</c>
+                  <c>0</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>4</c>
+                  <c>0</c>
+                  <c>*</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>5</c>
+                  <c>0</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>6</c>
+                  <c>0</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>7</c>
+                  <c>0</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>8</c>
+                  <c>0</c>
+                  <c>*</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>9</c>
+                  <c>0</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>10</c>
+                  <c>0</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>1</c>
+                  <c>11</c>
+                  <c>0</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>1</c>
+                  <c>0</c>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>2</c>
+                  <c>0</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>3</c>
+                  <c>1</c>
+                  <c>(</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>4</c>
+                  <c>1</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>5</c>
+                  <c>1</c>
+                  <c>*</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>6</c>
+                  <c>1</c>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>7</c>
+                  <c>1</c>
+                  <c>)</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>8</c>
+                  <c>0</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>9</c>
+                  <c>1</c>
+                  <c>(</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>10</c>
+                  <c>1</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>11</c>
+                  <c>1</c>
+                  <c>*</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>12</c>
+                  <c>2</c>
+                  <c>(</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>13</c>
+                  <c>2</c>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>14</c>
+                  <c>2</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>15</c>
+                  <c>2</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>16</c>
+                  <c>2</c>
+                  <c>)</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>17</c>
+                  <c>1</c>
+                  <c>)</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>(</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>2</c>
+                  <c>2</c>
+                  <c>(</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>3</c>
+                  <c>2</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>4</c>
+                  <c>2</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>5</c>
+                  <c>2</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>6</c>
+                  <c>2</c>
+                  <c>*</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>7</c>
+                  <c>2</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>8</c>
+                  <c>2</c>
+                  <c>)</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>9</c>
+                  <c>1</c>
+                  <c>*</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>10</c>
+                  <c>2</c>
+                  <c>(</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>11</c>
+                  <c>2</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>12</c>
+                  <c>2</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>13</c>
+                  <c>2</c>
+                  <c>9</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>14</c>
+                  <c>2</c>
+                  <c>*</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>15</c>
+                  <c>2</c>
+                  <c>8</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>16</c>
+                  <c>2</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>17</c>
+                  <c>2</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>18</c>
+                  <c>2</c>
+                  <c>)</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>19</c>
+                  <c>1</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>20</c>
+                  <c>1</c>
+                  <c>6</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>21</c>
+                  <c>1</c>
+                  <c>)</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>22</c>
+                  <c>0</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>23</c>
+                  <c>0</c>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>24</c>
+                  <c>0</c>
+                  <c>+</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>25</c>
+                  <c>0</c>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>26</c>
+                  <c>0</c>
+                  <c>*</c>
+                </r>
+                <r>
+                  <c>3</c>
+                  <c>27</c>
+                  <c>0</c>
+                  <c>2</c>
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Input</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="474" y="366" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+    </Node>
+    <Node ToolID="15">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="2298" y="558" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="line_id" selected="True" />
+            <SelectField field="operation_id" selected="True" />
+            <SelectField field="level" selected="True" />
+            <SelectField field="value" selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="2910" y="546" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - Iterative</Name>
+          <Abbrev>I</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>I Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="2910" y="666" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - Data</Name>
+          <Abbrev>D</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>D Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="2730" y="558" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>&gt;=</Operator>
+            <Field>level</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2020-12-18 14:55:11</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>0</Operand>
+              <StartDate>2020-12-18 14:55:11</StartDate>
+              <EndDate>2020-12-18 14:55:11</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[level] &gt;= 0</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="line_id" source="(Multiple Sources)" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="(Multiple Sources)" type="Byte" />
+            <Field name="value" size="255" source="(Multiple Sources)" type="V_String" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="line_id" order="Ascending" />
+            <Field field="operation_id" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="line_id" source="(Multiple Sources)" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="(Multiple Sources)" type="Byte" />
+            <Field name="value" size="255" source="(Multiple Sources)" type="V_String" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="line_id" order="Ascending" />
+            <Field field="operation_id" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="19">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="2910" y="798" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output - All</Name>
+          <Abbrev>A</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>A Output</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="20">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="2730" y="798" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[Engine.IterationNumber]" field="iteration" size="1" type="Byte" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[iteration = [Engine.IterationNumber]
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="(Multiple Sources)" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="(Multiple Sources)" type="Byte" />
+            <Field name="value" size="255" source="(Multiple Sources)" type="V_String" />
+            <Field name="iteration" source="Formula: [Engine.IterationNumber]" type="Byte" />
+          </RecordInfo>
+          <SortInfo locale="0">
+            <Field field="line_id" order="Ascending" />
+            <Field field="operation_id" order="Ascending" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="21">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="1254" y="450" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>line_id</UpdateField_Name>
+          <CreateField_Name>addition</CreateField_Name>
+          <CreateField_Type>Int64</CreateField_Type>
+          <CreateField_Size>8</CreateField_Size>
+          <OtherRows>NULL</OtherRows>
+          <NumRows value="2" />
+          <Expression>if [Row-1:value] = '+'
+then 
+
+if isnull([Row-2:addition])
+then tonumber([value]) + tonumber([Row-2:value])
+else tonumber([value]) + [Row-2:addition]
+endif
+
+else NULL()
+endif</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>addition</AnnotationText>
+          <DefaultAnnotationText>if [Row-1:value] = '+'
+then 
+
+if isnull([Row-2:addition])
+the...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="addition" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="Int64" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="23">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="1374" y="450" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>line_id</UpdateField_Name>
+          <CreateField_Name>addition_flag</CreateField_Name>
+          <CreateField_Type>Bool</CreateField_Type>
+          <CreateField_Size>1</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression>[value] = '+'
+or [Row+1:value] = '+'</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>addition_flag</AnnotationText>
+          <DefaultAnnotationText>[value] = '+'
+or [Row+1:value] = '+'</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="addition" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="Int64" />
+            <Field description="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" name="addition_flag" source="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" type="Bool" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="24">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="1506" y="450" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>IsFalse</Operator>
+            <Field>addition_flag</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2020-12-18 15:21:07</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>
+              </Operand>
+              <StartDate>2020-12-18 15:21:07</StartDate>
+              <EndDate>2020-12-18 15:21:07</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>[addition_flag]</AnnotationText>
+          <DefaultAnnotationText>[addition_flag] = 0</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="addition" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="Int64" />
+            <Field description="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" name="addition_flag" source="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" type="Bool" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="addition" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="Int64" />
+            <Field description="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" name="addition_flag" source="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" type="Bool" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="26">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1638" y="438" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="if [value] != '*' &#xA;and IsNull([addition])&#xA;then ToNumber([value])&#xA;else [addition]&#xA;endif" field="addition" size="8" type="Int64" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>addition</AnnotationText>
+          <DefaultAnnotationText>addition = if [value] != '*' 
+and IsNull([addition])
+then ToNumber([value])
+else...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="addition" source="Formula: if [value] != '*' &#xA;and IsNull([addition])&#xA;then ToNumber([value])&#xA;else [addition]&#xA;endif" type="Int64" />
+            <Field description="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" name="addition_flag" source="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" type="Bool" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="27">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="1770" y="438" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>line_id</UpdateField_Name>
+          <CreateField_Name>multiplication</CreateField_Name>
+          <CreateField_Type>Int64</CreateField_Type>
+          <CreateField_Size>8</CreateField_Size>
+          <OtherRows>NULL</OtherRows>
+          <NumRows value="2" />
+          <Expression>if [Row-1:value] = '*'
+then 
+
+if isnull([Row-2:multiplication])
+then tonumber([addition]) * tonumber([Row-2:addition])
+else tonumber([addition]) * [Row-2:multiplication]
+endif
+
+else [addition]
+endif</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>multiplication</AnnotationText>
+          <DefaultAnnotationText>if [Row-1:value] = '*'
+then 
+
+if isnull([Row-2:multiplication...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:addition])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:addition]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="addition" source="Formula: if [value] != '*' &#xA;and IsNull([addition])&#xA;then ToNumber([value])&#xA;else [addition]&#xA;endif" type="Int64" />
+            <Field description="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" name="addition_flag" source="Formula: [value] = '+'&#xA;or [Row+1:value] = '+'" type="Bool" />
+            <Field description="Formula: if [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:multiplication])&#xA;then tonumber([addition]) * tonumber([Row-2:addition])&#xA;else tonumber([addition]) * [Row-2:multiplication]&#xA;endif&#xA;&#xA;else [addition]&#xA;endif" name="multiplication" source="Formula: if [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:multiplication])&#xA;then tonumber([addition]) * tonumber([Row-2:addition])&#xA;else tonumber([addition]) * [Row-2:multiplication]&#xA;endif&#xA;&#xA;else [addition]&#xA;endif" type="Int64" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="28">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="1890" y="438" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="line_id" action="GroupBy" rename="line_id" />
+            <SummarizeField field="operation_id" action="Last" rename="operation_id" />
+            <SummarizeField field="level" action="GroupBy" rename="level" />
+            <SummarizeField field="level_id" action="GroupBy" rename="level_id" />
+            <SummarizeField field="multiplication" action="Last" rename="value" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="Summarize: GroupBy - line_id" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="Summarize: GroupBy - level" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Summarize: GroupBy - level_id" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:multiplication])&#xA;then tonumber([addition]) * tonumber([Row-2:addition])&#xA;else tonumber([addition]) * [Row-2:multiplication]&#xA;endif&#xA;&#xA;else [addition]&#xA;endif" name="value" source="Formula: if [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:multiplication])&#xA;then tonumber([addition]) * tonumber([Row-2:addition])&#xA;else tonumber([addition]) * [Row-2:multiplication]&#xA;endif&#xA;&#xA;else [addition]&#xA;endif" type="Int64" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+            <Field field="level" order="Asc" />
+            <Field field="level_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="29">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DetourEnd.DetourEnd">
+        <Position x="2010" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="line_id" source="Summarize: GroupBy - line_id" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="Summarize: GroupBy - level" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Summarize: GroupBy - level_id" type="Int16" />
+            <Field description="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" name="value" source="Formula: if [Row-1:value] = '+'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) + tonumber([Row-2:value])&#xA;else tonumber([value]) + [Row-2:output]&#xA;endif&#xA;&#xA;elseif [Row-1:value] = '*'&#xA;then &#xA;&#xA;if isnull([Row-2:output])&#xA;then tonumber([value]) * tonumber([Row-2:value])&#xA;else tonumber([value]) * [Row-2:output]&#xA;endif&#xA;&#xA;else NULL()&#xA;endif" type="Int64" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+            <Field field="level" order="Asc" />
+            <Field field="level_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDetourEnd" />
+    </Node>
+    <Node ToolID="30">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Detour.Detour">
+        <Position x="1098" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <DetourRight value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Left">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+        <MetaInfo connection="Right">
+          <RecordInfo>
+            <Field name="line_id" source="TextInput:" type="Byte" />
+            <Field name="operation_id" source="TextInput:" type="Byte" />
+            <Field name="level" source="TextInput:" type="Byte" />
+            <Field name="value" size="1" source="TextInput:" type="String" />
+            <Field name="max_level" source="TextInput:" type="Byte" />
+            <Field description="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" name="level_id" source="Formula: if [value] = '('&#xA;then [Row-1:level_id]+1&#xA;else [Row-1:level_id]&#xA;endif" type="Int16" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="line_id" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDetour" />
+    </Node>
+    <Node ToolID="31">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.RadioButtonGroup.RadioButtonGroup">
+        <Position x="966" y="102" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Radio Button (31)</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="32">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.RadioButtonGroup.RadioButtonGroup">
+        <Position x="1098" y="102" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Radio Button (32)</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="33">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
+        <Position x="1110" y="210" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Update Value</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="True" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="1" Connection="False" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="20" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="True" />
+      <Destination ToolID="30" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="33" Connection="Action" />
+      <Destination ToolID="30" Connection="Action" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="29" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="28" Connection="Output" />
+      <Destination ToolID="29" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="14" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="14" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="1" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="True" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="False" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="20" Connection="Output" />
+      <Destination ToolID="19" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="21" Connection="Output" />
+      <Destination ToolID="23" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="23" Connection="Output" />
+      <Destination ToolID="24" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="24" Connection="True" />
+      <Destination ToolID="26" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="26" Connection="Output" />
+      <Destination ToolID="27" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="27" Connection="Output" />
+      <Destination ToolID="28" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="29" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="30" Connection="Left" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="30" Connection="Right" />
+      <Destination ToolID="21" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="32" Connection="Question" />
+      <Destination ToolID="33" Connection="Question" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="False" />
+    <ZoomLevel value="-4" />
+    <LayoutType>Horizontal</LayoutType>
+    <Constants>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Output (16)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Output (17)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Output (19)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Radio Button (31)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Radio Button (32)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+    </Constants>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>day_18_macro</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="False" />
+    </Events>
+    <RuntimeProperties>
+      <Actions>
+        <NoCondition>
+          <Type>NoCondition</Type>
+          <Description>(Always Run)</Description>
+          <True>
+            <Action>
+              <Type>Dynamic</Type>
+              <Description />
+              <ToolId value="33" />
+              <Expression>{{INPUT}}</Expression>
+              <Destination>30/DetourRight/@value</Destination>
+              <Mapping>Update Detour Direction from Question</Mapping>
+              <Mode>Expression</Mode>
+              <DynamicConfiguration />
+              <DefaultConfiguration value="True" />
+            </Action>
+          </True>
+        </NoCondition>
+      </Actions>
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (12)</Name>
+          <ToolId value="12" />
+          <Questions>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description />
+              <Name>Macro Input (11)</Name>
+              <ToolId value="11" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (16)</Description>
+              <Name>Macro Output (16)</Name>
+              <ToolId value="16" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (17)</Description>
+              <Name>Macro Output (17)</Name>
+              <ToolId value="17" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (19)</Description>
+              <Name>Macro Output (19)</Name>
+              <ToolId value="19" />
+            </Question>
+            <Question>
+              <Type>RadioGroup</Type>
+              <Description>Part 1</Description>
+              <Name>Radio Button (31)</Name>
+              <ToolId value="31" />
+              <Questions />
+              <Default value="False" />
+              <Collapsable value="False" />
+            </Question>
+            <Question>
+              <Type>RadioGroup</Type>
+              <Description>Part 2</Description>
+              <Name>Radio Button (32)</Name>
+              <ToolId value="32" />
+              <Questions />
+              <Default value="False" />
+              <Collapsable value="False" />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="39" />
+      <MacroInputs />
+      <MacroOutputs />
+      <IterativeMacro>
+        <Input>Input</Input>
+        <Output>Output - Iterative</Output>
+        <IterationLimit value="100" />
+        <LimitBehavior>Error</LimitBehavior>
+        <OutputMode>AllSame</OutputMode>
+      </IterativeMacro>
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="16" Selected="True" />
+        <Tool ToolId="17" Selected="True" />
+        <Tool ToolId="19" Selected="True" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>

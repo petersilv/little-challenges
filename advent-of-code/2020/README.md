@@ -113,3 +113,9 @@
 | Workflow                                | Macro                                               |
 |:---------------------------------------:|:---------------------------------------------------:|
 | ![day_17](other/screenshots/day_17.png) | ![day_17_macro](other/screenshots/day_17_macro.png) |
+
+## Day 18
+
+| Workflow                                | Macro                                               |
+|:---------------------------------------:|:---------------------------------------------------:|
+| ![day_18](other/screenshots/day_18.png) | ![day_18_macro](other/screenshots/day_18_macro.png) |
